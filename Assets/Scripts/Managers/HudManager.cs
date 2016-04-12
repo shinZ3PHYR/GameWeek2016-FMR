@@ -42,10 +42,13 @@ public class HudManager : MonoBehaviour {
     {
         hudPosition = hud.transform.position;
         if (vertAxis > 0)
+        {
             hudPosition.y += Screen.height;
+        }
         else
+        {
             hudPosition.y -= Screen.height;
+        }
         hud.transform.position = hudPosition;
-        //EventManager.OnMenu -= ShowMenu;
     }
 }
