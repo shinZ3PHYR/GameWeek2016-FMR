@@ -4,34 +4,91 @@ using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour {
 
+    public delegate void AccrocheAction(string accroche);
+    public static event AccrocheAction OnReturnAccroche;
+
+    public delegate void QuestionAction(string question);
+    public static event QuestionAction OnReturnQuestion;
+
+    public delegate void ResponseAction(List<string> responses);
+    public static event ResponseAction OnReturnResponses;
+
+    public delegate void ArgAction(List<string> arguments);
+    public static event ArgAction OnReturnArguments;
+
+    public delegate void RetourAction(List<string> retours);
+    public static event RetourAction OnReturnRetours;
+
     private GameObject currentChar;
     private string currentType;
+    private List<string> likeList;
+    private List<string> dislikeList;
+
     private int rdmValue;
     private int rdmChance;
 
+    public List<string> Categories;
+    private string categorie;
     public List<string> accroches;
     private string accroche;
-    //private Dictionary<int, string> questions;
+
     public List<string> Questions;
-    //private Dictionary<int, string> reponses;
-    public List<string> Reponses;
-    //private Dictionary<int, string> arguments;
+    private Dictionary<string, string> questionsCategories = new Dictionary<string, string>();
+    private string question;
+
+    private Dictionary<string, string> questionsResponses = new Dictionary<string, string>();
+    public List<string> Responses;
+    private List<string> responses;
+    private string chosenResponse;
+
+    private Dictionary<string, string> responsesArguments = new Dictionary<string, string>();
     public List<string> Arguments;
+    private List<string> arguments;
+    private string chosenArgument;
+
+    private Dictionary<string, string> argumentsRetours = new Dictionary<string, string>();
+    public List<string> Retours;
+    private List<string> retours;
 
    
 
 	// Use this for initialization
 	void Start () {
+        for (int i = 0; i < Categories.Count; i++)
+        {
+            questionsCategories.Add(Categories[i], Questions[i * 2]);
+            questionsCategories.Add(Categories[i] + "2", Questions[i * 2 + 1]);
+        }
+        for (int i = 0; i < Questions.Count; i++)
+        {
+            questionsResponses.Add(Questions[i] + "0", Responses[i * 4]);
+            questionsResponses.Add(Questions[i] + "1", Responses[i * 4 + 1]);
+            questionsResponses.Add(Questions[i] + "2", Responses[i * 4 + 2]);
+            questionsResponses.Add(Questions[i] + "3", Responses[i * 4 + 3]);
+        }
+        for (int i = 0; i < Responses.Count; i++)
+        {
+            responsesArguments.Add(Responses[i] + "0", Arguments[i * 2]);
+            responsesArguments.Add(Responses[i] + "1", Arguments[i * 2 + 1]);
+        }
+        for (int i = 0; i < Arguments.Count; i++)
+        {
+            argumentsRetours.Add(Arguments[i] + "0", Retours[i * 2]);
+            argumentsRetours.Add(Arguments[i] + "1", Retours[i * 2 + 1]);
+        }
+
         currentChar = GameManager.singleton.currentChar;
-        EventManager.OnNewFlirt += NewFlirt;
-        //EventManager.OnQuestion += NewFlirt;
-        //EventManager.OnResponse += NewFlirt;
-        //EventManager.OnArgument += NewFlirt;
-        //
-        //EventManager.OnAccroche();
-        //EventManager.OnReturnQuestion();
-        //EventManager.OnReturnResponse();
-        //EventManager.OnReturnArgument();
+        EventManager.OnNewFlirt += NewAccroche;
+        EventManager.OnQuestion += NewQuestion;
+        EventManager.OnResponse += NewResponses;
+        EventManager.OnArgument += NewArguments;
+        EventManager.OnRetour += NewRetours;
+        
+        
+
+        
+        //EventManager.OnReturnResponse(responses);
+        //EventManager.OnReturnArgument(arguments);
 	}
 	
 	// Update is called once per frame
@@ -39,10 +96,13 @@ public class DialogueManager : MonoBehaviour {
         
 	}
 
-    void NewFlirt()
+    void NewAccroche()
     {
         currentChar = GameManager.singleton.currentChar;
         //currentType = currentChar.GetComponent<Character>().type;
+        //likeList = currentChar.GetComponent<Character>().likeList;
+        //dislikeList = currentChar.GetComponent<Character>().dislikeList;
+
         rdmValue = Random.Range(0, 10);
         rdmChance = Random.Range(0, 1);
         accroche = accroches[rdmValue];
@@ -85,5 +145,54 @@ public class DialogueManager : MonoBehaviour {
         //        }
         //        break;
         //}
+        //EventManager.OnReturnAccroche(accroche);
+    }
+
+    void NewQuestion()
+    {
+        int i = Random.Range(0, 3);
+        switch (i)
+        {
+            case 0:
+                categorie = likeList[0];
+                break;
+            case 1:
+                categorie = likeList[1];
+                break;
+            case 2:
+                categorie = dislikeList[0];
+                break;
+            case 3:
+                categorie = dislikeList[1];
+                break;
+        }
+        question = questionsCategories[categorie];
+        OnReturnQuestion(question);
+    }
+
+    void NewResponses()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            responses[i] = questionsResponses[question+i];
+        }
+        OnReturnResponses(responses);
+    }
+
+    void NewArguments(string chosenResponse)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            arguments[i] = responsesArguments[chosenResponse + i];
+        }
+        OnReturnArguments(arguments);
+    }
+    void NewRetours(string chosenArgument)
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            retours[i] = argumentsRetours[chosenArgument + i];
+        }
+        OnReturnRetours(retours);
     }
 }

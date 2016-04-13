@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EventManager : MonoBehaviour {
 
@@ -11,6 +12,14 @@ public class EventManager : MonoBehaviour {
 
     public delegate void CharAction();
     public static event CharAction OnNewFlirt;
+    public static event CharAction OnQuestion;
+    public static event CharAction OnResponse;
+
+    public delegate void CharActionParam(string chosenOne);
+    public static event CharActionParam OnArgument;
+    public static event CharActionParam OnRetour;
+
+    
 
 	// Use this for initialization
 	void Start () {
