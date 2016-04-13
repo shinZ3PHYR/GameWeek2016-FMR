@@ -16,6 +16,7 @@ public class Character : MonoBehaviour {
 
 	public Mood currentMood = Mood.Neutral;
 
+
 	public Sprite faceShape;
 	public Sprite eyes;
 	public Sprite mouth;
@@ -34,13 +35,14 @@ public class Character : MonoBehaviour {
 	public List<string> likeList = new List<string>();
 	public List<string> dislikeList = new List<string>();
 
-	public CharacterManager.Type archetype;
-
+	public CharacterManager.Type type;
+	public CharacterManager.Gender gender;
 	public CharacterManager.Race race;
 
 
 	void Start ()
 	{
+		Debug.Log(type);
 		// Debug.Log(neutralSet[0]);
 		// currentSet[1] = GetChild(1);
 	}
@@ -55,10 +57,44 @@ public class Character : MonoBehaviour {
 		transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0]; //eyes
 		transform.GetChild(2).GetComponent<Image>().sprite = neutralSet[1]; //mouth
 		transform.GetChild(3).GetComponent<Image>().sprite = nose;
-		// transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0];
+		transform.GetChild(4).GetComponent<Image>().sprite = neutralSet[2]; //hairCut
+		transform.GetChild(5).GetComponent<Image>().sprite = neutralSet[3]; //Dress
+		transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[4]; //ForeArm
+	}
+
+	public void changeMood(Mood mood)
+	{
+		switch(mood)
+		{
+			case Mood.Neutral:
+				transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0]; //eyes
+				transform.GetChild(2).GetComponent<Image>().sprite = neutralSet[1]; //mouth
+				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[4]; //ForeArm
+				break;
+			case Mood.VeryHappy:
+				transform.GetChild(1).GetComponent<Image>().sprite = veryHappySet[0]; //eyes
+				transform.GetChild(2).GetComponent<Image>().sprite = veryHappySet[1]; //mouth
+				transform.GetChild(6).GetComponent<Image>().sprite = veryHappySet[2]; //ForeArm
+				break;
+			case Mood.Happy:
+				transform.GetChild(1).GetComponent<Image>().sprite = happySet[0]; //eyes
+				transform.GetChild(2).GetComponent<Image>().sprite = happySet[1]; //mouth
+				transform.GetChild(6).GetComponent<Image>().sprite = happySet[2]; //ForeArm
+				break;
+			case Mood.VeryAngry:
+				transform.GetChild(1).GetComponent<Image>().sprite = veryAngrySet[0]; //eyes
+				transform.GetChild(2).GetComponent<Image>().sprite = veryAngrySet[1]; //mouth
+				transform.GetChild(6).GetComponent<Image>().sprite = veryAngrySet[2]; //ForeArm
+				break;
+			case Mood.Angry:
+				transform.GetChild(1).GetComponent<Image>().sprite = angrySet[0]; //eyes
+				transform.GetChild(2).GetComponent<Image>().sprite = angrySet[1]; //mouth
+				transform.GetChild(6).GetComponent<Image>().sprite = angrySet[2]; //ForeArm
+				break;
+		}
 	}
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
 }
