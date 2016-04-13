@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DialogueBoxManager : MonoBehaviour {
 
-	public string text = "bla bla bla";
+	public string text;
 	public bool textLock = false;
 
 	public List<string> dialList= new List<string>();
@@ -57,13 +57,13 @@ public class DialogueBoxManager : MonoBehaviour {
 
 		for(int i = 0; i < text.Length; i++){
 			uiText.text += text[i];
-			if(Input.GetKey(KeyCode.Mouse0))
-			{
-				uiText.text = text;
+			// if(Input.GetKey(KeyCode.Mouse0)) TODO FIX !
+			// {
+			// 	uiText.text = text;
 				
-				// textLock = false;
-				yield break;
-			}
+			// 	textLock = false;
+			// 	yield break;
+			// }
 			yield return new WaitForSeconds(delay);
 		}
 		textLock = false;
