@@ -59,7 +59,10 @@ public class DialogueBoxManager : MonoBehaviour {
 			uiText.text += text[i];
 			if(Input.GetKey(KeyCode.Mouse0))
 			{
-				delay = 0;
+				uiText.text = text;
+				
+				// textLock = false;
+				yield break;
 			}
 			yield return new WaitForSeconds(delay);
 		}
