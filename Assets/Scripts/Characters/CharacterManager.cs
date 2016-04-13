@@ -10,10 +10,10 @@ public class CharacterManager : MonoBehaviour {
 	public enum Type
 	{
 		Shy,
-		Haughty,
+		Seductive,
 		Tomboy,
 		HungUp,
-		Seductive,
+		Haughty,
 		Bipolar
 	}
 
@@ -34,6 +34,9 @@ public class CharacterManager : MonoBehaviour {
 
 	public GameObject genericCharacterPrefab;
 
+	public List<string> wayOfLifePool = new List<string>();
+	public List<string> hobbiesPool = new List<string>();
+
 	public List<Sprite> femaleFacePool = new List<Sprite>();
 	public List<Sprite> femaleEyesPool = new List<Sprite>();
 	public List<Sprite> femaleMouthesPool = new List<Sprite>();
@@ -44,6 +47,17 @@ public class CharacterManager : MonoBehaviour {
 	public List<string> femaleNamePool = new List<string>();
 
 	public List<Sprite> femaleMoodPool = new List<Sprite>();
+
+	public List<Sprite> maleFacePool = new List<Sprite>();
+	public List<Sprite> maleEyesPool = new List<Sprite>();
+	public List<Sprite> maleMouthesPool = new List<Sprite>();
+	public List<Sprite> maleHairCutPool = new List<Sprite>();
+	public List<Sprite> maleDressPool = new List<Sprite>();
+	// public List<Sprite> accessoryPool = new List<Sprite>();
+	public List<Sprite> maleForeArmsPool = new List<Sprite>();
+	public List<string> maleNamePool = new List<string>();
+
+	public List<Sprite> maleMoodPool = new List<Sprite>();
 
 	public List<Character> charaList = new List<Character>();
 
@@ -56,19 +70,33 @@ public class CharacterManager : MonoBehaviour {
 		EmptyChar.transform.parent = GameObject.Find("Canvas").transform;
 		customCharacter = EmptyChar.GetComponent<Character>();
 		//TODO Manage Race
-		customCharacter.race = (Race)Random.Range(0,2);
-		customCharacter.gender = (Gender)Random.Range(1, 1); //TODO ADD MALES
-
-		if(customCharacter.gender == Gender.Female)
+		
+		if(GameManager.singleton.MEUF)
 		{
+			customCharacter.gender = Gender.Male;
+		}
+		if(GameManager.singleton.MEC)
+		{
+			customCharacter.gender = Gender.Female;
+		}
+		if(GameManager.singleton.MEC && GameManager.singleton.MEUF)
+		{
+			customCharacter.gender = (Gender)Random.Range(1,2);
+		}
+
+		customCharacter.race = (Race)Random.Range(0,2);
+		if(customCharacter.gender == Gender.Female)
+		{	
+				
 			customCharacter.neutralSet.Add(femaleEyesPool[Random.Range(0, femaleEyesPool.Count-1)]); //eyes
+			customCharacter.eyesColor = new Color(Random.Range(.4f, 1), Random.Range(.4f, 1), Random.Range(.4f, 1), Random.Range(.6f, 1));
 			customCharacter.neutralSet.Add(femaleMouthesPool[Random.Range(0, femaleMouthesPool.Count-1)]);
 			customCharacter.neutralSet.Add(femaleHairCutPool[Random.Range(0, femaleHairCutPool.Count-1)]);
 			customCharacter.neutralSet.Add(femaleDressPool[Random.Range(0, femaleDressPool.Count-1)]);
 			customCharacter.neutralSet.Add(femaleForeArmsPool[Random.Range(0, femaleForeArmsPool.Count-1)]);
 
 			customCharacter.name = femaleNamePool[Random.Range(0, femaleNamePool.Count-1)];
-			customCharacter.type = (Type)Random.Range(0, 5);
+			customCharacter.type = (Type)Random.Range(0, 5); //TODO get all types
 
 			// Debug.Log("race: "+customCharacter.race+"; eyes: "+customCharacter.neutralSet[0]+"; mouth: "+customCharacter.neutralSet[1]+"; haircut: "+customCharacterHairCut+"; dress: "+customCharacterDress+"; name: "+customCharacterName+"; type: "+customCharacter.type);
 
@@ -80,7 +108,22 @@ public class CharacterManager : MonoBehaviour {
 		}
 		else
 		{
-			Debug.Log("it's a male");
+			customCharacter.neutralSet.Add(maleEyesPool[Random.Range(0, maleEyesPool.Count-1)]); //eyes
+			customCharacter.neutralSet.Add(maleMouthesPool[Random.Range(0, maleMouthesPool.Count-1)]);
+			customCharacter.neutralSet.Add(maleHairCutPool[Random.Range(0, maleHairCutPool.Count-1)]);
+			customCharacter.neutralSet.Add(maleDressPool[Random.Range(0, maleDressPool.Count-1)]);
+			customCharacter.neutralSet.Add(maleForeArmsPool[Random.Range(0, maleForeArmsPool.Count-1)]);
+
+			customCharacter.name = maleNamePool[Random.Range(0, maleNamePool.Count-1)];
+			customCharacter.type = (Type)Random.Range(0, 5); //TODO get all types
+
+			// Debug.Log("race: "+customCharacter.race+"; eyes: "+customCharacter.neutralSet[0]+"; mouth: "+customCharacter.neutralSet[1]+"; haircut: "+customCharacterHairCut+"; dress: "+customCharacterDress+"; name: "+customCharacterName+"; type: "+customCharacter.type);
+
+			charaList.Add(customCharacter);
+			
+			GetAssociatedSet(customCharacter.type, customCharacter.neutralSet);
+
+			customCharacter.DrawNeutralChar();
 		}
 		// customCharacter.faceShape = facePool[Random.Range(0, facePool.Count-1)];
 	}
@@ -92,40 +135,92 @@ public class CharacterManager : MonoBehaviour {
 
 	public void GetAssociatedSet(Type type, List<Sprite> spriteList)
 	{
-		switch(type)
-		{
-			case Type.Shy: 
-				// GetShyHappySet(spriteList);
-				// GetShyVeryHappySet(spriteList);
-				// GetShyAngrySet(spriteList);
-				// GetShyVeryAngrySet(spriteList);
-				break;
-			case Type.Haughty:
-				// GetHaughtyHappySet(spriteList);
-				// GetHaughtyVeryHappySet(spriteList);
-				// GetHaughtyAngrySet(spriteList);
-				// GetHaughtyVeryAngrySet(spriteList);
-				break;
-			case Type.Tomboy: break;
-			case Type.HungUp: break;
-			case Type.Seductive:break;
-			case Type.Bipolar:break;
-		}
-	}
-
-//ShySet
-	public void GetShyHappySet(List<Sprite> spriteList)
-	{
-		// for(int i = 0; i<spriteList.Count; i++)
+		GetHappySet(type);
+		GetVeryHappySet(type);
+		GetAngrySet(type);
+		GetVeryAngrySet(type);
+		// switch(type)
 		// {
-		// 	Debug.Log(spriteList[i]);
-		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-		// 	// Sprite happyShyForeArms = 
+		// 	case Type.Shy: 
+		// 		// GetShyHappySet(spriteList);
+		// 		// GetShyVeryHappySet(spriteList);
+		// 		// GetShyAngrySet(spriteList);
+		// 		// GetShyVeryAngrySet(spriteList);
+		// 		break;
+		// 	case Type.Haughty:
+		// 		// GetHaughtyHappySet(spriteList);
+		// 		// GetHaughtyVeryHappySet(spriteList);
+		// 		// GetHaughtyAngrySet(spriteList);
+		// 		// GetHaughtyVeryAngrySet(spriteList);
+		// 		break;
+		// 	case Type.Tomboy: break;
+		// 	case Type.HungUp: break;
+		// 	case Type.Seductive:break;
+		// 	case Type.Bipolar:break;
 		// }
-
-		customCharacter.happySet[1] = femaleMoodPool.Find(item=>(item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-
 	}
+
+	public void GetHappySet(Type type)
+	{
+		Debug.Log(type.ToString());
+		Sprite temp = femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));//&&item.name.Contains(customCharacter.gender.ToString())
+		Debug.Log(temp);
+		customCharacter.happySet.Add(temp);
+	}
+
+	public void GetVeryHappySet(Type type)
+	{
+		Debug.Log(type.ToString());
+		Sprite temp = femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("VeryHappy")));//&&item.name.Contains(customCharacter.gender.ToString())
+		Debug.Log(temp);
+		customCharacter.veryHappySet.Add(temp);
+	}
+
+	public void GetAngrySet(Type type)
+	{
+		Debug.Log(type.ToString());
+		Sprite temp = femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Angry")));//&&item.name.Contains(customCharacter.gender.ToString())
+		Debug.Log(temp);
+		customCharacter.angrySet.Add(temp);
+	}
+
+	public void GetVeryAngrySet(Type type)
+	{
+		Debug.Log(type.ToString());
+		Sprite temp = femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("VeryAngry")));//&&item.name.Contains(customCharacter.gender.ToString())
+		Debug.Log(temp);
+		customCharacter.veryAngrySet.Add(temp);
+	}
+
+	public void SetLikes()
+	{
+		customCharacter.likeList.Add(wayOfLifePool[Random.Range(0, wayOfLifePool.Count-1)]);
+		customCharacter.likeList.Add(hobbiesPool[Random.Range(0, hobbiesPool.Count-1)]);
+	}
+
+	public void SetDislikes()
+	{
+		// wayOfLifePool = wayOfLifePool.Except(customCharacter.likeList[0]);
+		// hobbiesPool = hobbiesPool.Except(customCharacter.likeList[1]);
+		do
+		{
+			customCharacter.dislikeList.Add(wayOfLifePool[Random.Range(0, wayOfLifePool.Count-1)]);
+			customCharacter.dislikeList.Add(hobbiesPool[Random.Range(0, hobbiesPool.Count-1)]);
+		}
+		while(customCharacter.dislikeList[0] != customCharacter.likeList[0] && customCharacter.dislikeList[0] != customCharacter.likeList[1] && customCharacter.dislikeList[1] != customCharacter.likeList[0] && customCharacter.dislikeList[1] != customCharacter.likeList[1]);
+	}
+	// public void GetShyHappySet(List<Sprite> spriteList)
+	// {
+	// 	// for(int i = 0; i<spriteList.Count; i++)
+	// 	// {
+	// 	// 	Debug.Log(spriteList[i]);
+	// 	// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
+	// 	// 	// Sprite happyShyForeArms = 
+	// 	// }
+
+	// 	customCharacter.happySet[1] = femaleMoodPool.Find(item=>(item.name.Contains("Mouth")&&item.name.Contains("Happy")));
+
+	// }
 
 // 	public void GetShyAngrySet(List<Sprite> spriteList)
 // 	{
@@ -380,6 +475,7 @@ public class CharacterManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		// GameManager.singleton.
 		CreateRandomChar();
 		customCharacter = null;
 	}
