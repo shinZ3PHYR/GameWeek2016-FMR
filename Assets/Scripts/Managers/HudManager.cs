@@ -5,12 +5,20 @@ using UnityEngine.UI;
 
 public class HudManager : MonoBehaviour {
 
+    public delegate void CharActionParamA(string chosenOne);
+    public static event CharActionParamA OnArgument;
+
+    public delegate void CharActionParam(string chosenOne);
+    public static event CharActionParam OnRetour;
+
     public Transform menu;
     public Image hud;
     public Text button1;
     public Text button2;
     public Text button3;
     public Text button4;
+    public Text button5;
+    public Text button6;
 
     private Vector3 hudPosition;
     private List<string> ResponsesList;
@@ -22,7 +30,7 @@ public class HudManager : MonoBehaviour {
         EventManager.OnUI += ShowHud;
 
         DialogueManager.OnReturnResponses += NewResponses;
-        //DialogueManager.OnReturnArguments += NewArguments;
+        DialogueManager.OnReturnArguments += NewArguments;
 
         menu.gameObject.SetActive(false);
 
@@ -39,6 +47,11 @@ public class HudManager : MonoBehaviour {
             button2.text = ResponsesList[1];
             button3.text = ResponsesList[2];
             button4.text = ResponsesList[3];
+        }
+        if (ArgumentsList != null)
+        {
+            button5.text = ArgumentsList[0];
+            button6.text = ArgumentsList[1];
         }
 	}
 
@@ -86,19 +99,19 @@ public class HudManager : MonoBehaviour {
 
     public void Button1Press()
     {
-
+        OnArgument(button1.text);
     }
     public void Button2Press()
     {
-
+        OnArgument(button2.text);
     }
     public void Button3Press()
     {
-
+        OnArgument(button3.text);
     }
     public void Button4Press()
     {
-
+        OnArgument(button4.text);
     }
     public void NewResponses(List<string> responsesList)
     {
@@ -107,11 +120,11 @@ public class HudManager : MonoBehaviour {
 
     public void Button5Press()
     {
-
+        OnRetour(button5.text);
     }
     public void Button6Press()
     {
-
+        OnRetour(button6.text);
     }
     public void NewArguments(List<string> argumentsList)
     {
