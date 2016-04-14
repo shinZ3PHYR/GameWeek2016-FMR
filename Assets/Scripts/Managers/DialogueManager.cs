@@ -16,8 +16,8 @@ public class DialogueManager : MonoBehaviour {
     public delegate void ArgAction(List<string> arguments);
     public static event ArgAction OnReturnArguments;
 
-    public delegate void RetourAction(List<string> retours);
-    public static event RetourAction OnReturnRetours;
+    public delegate void RetourAction(string retour);
+    public static event RetourAction OnReturnRetour;
 
     private GameObject currentChar;
     private int currentType;
@@ -178,11 +178,7 @@ public class DialogueManager : MonoBehaviour {
         for (int i = 0; i < 4; i++)
         {
         responses.Add(questionsResponses[question + i]);
-        //responses[1] = questionsResponses[question + "1"];
-        //responses[2] = questionsResponses[question + "2"];
-        //responses[3] = questionsResponses[question + "3"];
         }
-        //Debug.Log(questionsResponses[question + "0"]);
         OnReturnResponses(responses);
     }
 
@@ -192,9 +188,6 @@ public class DialogueManager : MonoBehaviour {
         for (int i = 0; i < 2; i++)
         {
             arguments.Add(responsesArguments[chosenResponse + i]);
-            //Debug.Log(responsesArguments[chosenResponse + i]);
-            //Debug.Log(arguments);
-            //arguments[i] = responsesArguments[chosenResponse + i];
         }
         OnReturnArguments(arguments);
     }
@@ -203,9 +196,8 @@ public class DialogueManager : MonoBehaviour {
         retours = new List<string>();
         for (int i = 0; i < 2; i++)
         {
-            retours.Add(argumentsRetours[chosenResponse + i]);
-            //retours[i] = argumentsRetours[chosenArgument + i];
+            retours.Add(argumentsRetours[chosenArgument + i]);
         }
-        OnReturnRetours(retours);
+        OnReturnRetour(retours[0]);
     }
 }

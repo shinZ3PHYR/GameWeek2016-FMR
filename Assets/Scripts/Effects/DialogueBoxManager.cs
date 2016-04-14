@@ -26,8 +26,8 @@ public class DialogueBoxManager : MonoBehaviour {
 	void Start () {
         DialogueManager.OnReturnAccroche += SetCurrentAccroche;
         DialogueManager.OnReturnQuestion += SetCurrentQuestion;
-        
-        //DialogueManager.OnReturnRetours += NewRetours;
+
+        DialogueManager.OnReturnRetour += SetCurrentRetour;
 
 		uiText = GetComponent<Text>();
 		//text = dialList[dialogueIndex];
@@ -48,6 +48,11 @@ public class DialogueBoxManager : MonoBehaviour {
     {
         dialList.Add(dialString);
         OnResponse();
+    }
+
+    void SetCurrentRetour(string dialString)
+    {
+        dialList.Add(dialString);
     }
 
 	public void NextDialogue()
