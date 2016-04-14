@@ -5,10 +5,8 @@ using UnityEngine.UI;
 public class HudManager : MonoBehaviour {
 
     public Transform menu;
-    //public Image menu;
     public Image hud;
 
-    //private Vector3 menuPosition;
     private Vector3 hudPosition;
 
 	// Use this for initialization
@@ -16,9 +14,6 @@ public class HudManager : MonoBehaviour {
         EventManager.OnMenu += ShowMenu;
         EventManager.OnUI += ShowHud;
 
-        //menuPosition = menu.transform.position;
-        //menuPosition.y -= Screen.height;
-        //menu.transform.position = menuPosition;
         menu.gameObject.SetActive(false);
 
         hudPosition = hud.transform.position;
@@ -34,9 +29,6 @@ public class HudManager : MonoBehaviour {
 
     void ShowMenu()
     {
-        //menuPosition = menu.transform.position;
-        //menuPosition.y += Screen.height;
-        //menu.transform.position = menuPosition;
         menu.gameObject.SetActive(true);
         EventManager.OnMenu -= ShowMenu;
     }
