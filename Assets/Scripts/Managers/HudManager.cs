@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HudManager : MonoBehaviour {
 
-    public delegate void CharActionParamA(string chosenOne);
+    public delegate void CharActionParamA(string chosenOne, int buttonNb);
     public static event CharActionParamA OnArgument;
 
     public delegate void CharActionParam(string chosenOne);
@@ -104,19 +104,19 @@ public class HudManager : MonoBehaviour {
 
     public void Button1Press()
     {
-        OnArgument(button1.text);
+        OnArgument(button1.text, 0);
     }
     public void Button2Press()
     {
-        OnArgument(button2.text);
+        OnArgument(button2.text, 1);
     }
     public void Button3Press()
     {
-        OnArgument(button3.text);
+        OnArgument(button3.text, 2);
     }
     public void Button4Press()
     {
-        OnArgument(button4.text);
+        OnArgument(button4.text, 3);
     }
     public void NewResponses(List<string> responsesList)
     {

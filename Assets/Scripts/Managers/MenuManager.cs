@@ -27,17 +27,20 @@ public class MenuManager : MonoBehaviour {
 
     public void FacilePress()
     {
-        Application.LoadLevel(1);
+        GameManager.singleton.difficulty = GameManager.Difficulty.Easy;
+        Application.LoadLevel(2);
     }
 
     public void NormalPress()
     {
+        GameManager.singleton.difficulty = GameManager.Difficulty.Normal;
         Application.LoadLevel(2);
     }
 
     public void DifficilePress()
     {
-        Application.LoadLevel(3);
+        GameManager.singleton.difficulty = GameManager.Difficulty.Hard;
+        Application.LoadLevel(2);
     }
 
     public void OptionsPress()

@@ -270,9 +270,11 @@ public class CharacterManager : MonoBehaviour {
 		for(var i = 0; i< playerToCreate; i++)
 			CreateRandomChar();
 
-		if(charaList!=null)
-			GameManager.singleton.charList = charaList;
-			OnCreatedCharaList();
+        if (charaList != null)
+        {
+            GameManager.singleton.charList = charaList;
+            OnCreatedCharaList();
+        }
 	}
 	
 	// Update is called once per frame
