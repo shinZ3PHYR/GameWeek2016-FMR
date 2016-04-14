@@ -5,7 +5,7 @@ using System.Collections;
 public class Timer : MonoBehaviour
 {
 
-    float timeLeft = 3;
+    
     private Slider _slider;
     public int multiplier = 10;
     bool stuffDone = false;
@@ -18,7 +18,10 @@ public class Timer : MonoBehaviour
     }
 
 
-
+    void OnEnable()
+    {
+        _slider.value = 1;
+    }
 
     // Update is called once per frame
     void Update()

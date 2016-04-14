@@ -54,6 +54,7 @@ public class DialogueManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
         for (int i = 0; i < Categories.Count; i++)
         {
             questionsCategories.Add(Categories[i], Questions[i * 2]);
@@ -81,8 +82,8 @@ public class DialogueManager : MonoBehaviour {
         EventManager.OnNewFlirt += NewAccroche;
         DialogueBoxManager.OnQuestion += NewQuestion;
         DialogueBoxManager.OnResponse += NewResponses;
-        EventManager.OnArgument += NewArguments;
-        EventManager.OnRetour += NewRetours;
+        HudManager.OnArgument += NewArguments;
+        HudManager.OnRetour += NewRetours;
         
         
 
@@ -173,26 +174,37 @@ public class DialogueManager : MonoBehaviour {
 
     void NewResponses()
     {
+        responses = new List<string>();
         for (int i = 0; i < 4; i++)
         {
-            responses[i] = questionsResponses[question+i];
+        responses.Add(questionsResponses[question + i]);
+        //responses[1] = questionsResponses[question + "1"];
+        //responses[2] = questionsResponses[question + "2"];
+        //responses[3] = questionsResponses[question + "3"];
         }
+        //Debug.Log(questionsResponses[question + "0"]);
         OnReturnResponses(responses);
     }
 
     void NewArguments(string chosenResponse)
     {
+        arguments = new List<string>();
         for (int i = 0; i < 2; i++)
         {
-            arguments[i] = responsesArguments[chosenResponse + i];
+            arguments.Add(responsesArguments[chosenResponse + i]);
+            //Debug.Log(responsesArguments[chosenResponse + i]);
+            //Debug.Log(arguments);
+            //arguments[i] = responsesArguments[chosenResponse + i];
         }
         OnReturnArguments(arguments);
     }
     void NewRetours(string chosenArgument)
     {
+        retours = new List<string>();
         for (int i = 0; i < 2; i++)
         {
-            retours[i] = argumentsRetours[chosenArgument + i];
+            retours.Add(argumentsRetours[chosenResponse + i]);
+            //retours[i] = argumentsRetours[chosenArgument + i];
         }
         OnReturnRetours(retours);
     }

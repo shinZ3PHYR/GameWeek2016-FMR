@@ -13,12 +13,6 @@ public class EventManager : MonoBehaviour {
     public delegate void CharAction();
     public static event CharAction OnNewFlirt;
 
-    public delegate void CharActionParam(string chosenOne);
-    public static event CharActionParam OnArgument;
-    public static event CharActionParam OnRetour;
-
-    
-
 	// Use this for initialization
 	void Start () {
 	
