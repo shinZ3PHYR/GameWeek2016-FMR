@@ -72,6 +72,8 @@ public class Character : MonoBehaviour {
 		transform.GetChild(4).GetComponent<Image>().sprite = neutralSet[2]; //hairCut
 		transform.GetChild(5).GetComponent<Image>().sprite = neutralSet[3]; //Dress
 		transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[4]; //ForeArm
+
+		Appear();
 	}
 
 	IEnumerator TweenTranslate(float scaleTime)
@@ -79,7 +81,7 @@ public class Character : MonoBehaviour {
 		float elapsedTime = 0;
 		while(elapsedTime < scaleTime)// && AllowFX
 		{
-			Debug.Log("dayum");
+			// Debug.Log("dayum");
 			float scaleRatio = scaleCurve.Evaluate(elapsedTime /scaleTime);
 			transform.Translate(0, scaleRatio * 20f, 0);
 			elapsedTime+= Time.deltaTime;
@@ -115,7 +117,7 @@ public class Character : MonoBehaviour {
 	public void Appear()
 	{
 		transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-		StartCoroutine(TweenTranslate(.75f));
+		StartCoroutine(TweenTranslate(1f));
 	}
 
 	public void Flip()
@@ -133,6 +135,11 @@ public class Character : MonoBehaviour {
 		Mood randMood = (Mood)Random.Range(0, 5);
 		ChangeMood(randMood);
 		currentMood = randMood;
+	}
+
+	public void SpawnParticles()
+	{
+		
 	}
 
 	public void ChangeMood(Mood mood)

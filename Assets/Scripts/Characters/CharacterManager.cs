@@ -65,6 +65,10 @@ public class CharacterManager : MonoBehaviour {
 
 	public void CreateRandomChar()
 	{
+		if(customCharacter != null)
+		{
+			customCharacter = null;
+		}
 
 		GameObject EmptyChar = GameObject.Instantiate(genericCharacterPrefab, charaPos.position, Quaternion.identity) as GameObject;
 		EmptyChar.transform.parent = GameObject.Find("Canvas").transform;
@@ -98,7 +102,14 @@ public class CharacterManager : MonoBehaviour {
 			customCharacter.neutralSet.Add(femaleForeArmsPool[Random.Range(0, femaleForeArmsPool.Count-1)]);
 
 			customCharacter.name = femaleNamePool[Random.Range(0, femaleNamePool.Count-1)];
-			customCharacter.type = (Type)Random.Range(0, 5); //TODO get all types
+
+			switch(GameManager.singleton.difficulty)
+			{
+				case GameManager.Difficulty.Easy: customCharacter.type = (Type)Random.Range(0, 1); break;
+				case GameManager.Difficulty.Normal: customCharacter.type = (Type)Random.Range(0, 3); break;
+				case GameManager.Difficulty.Hard: customCharacter.type = (Type)Random.Range(0, 5); break;
+				default: customCharacter.type = (Type)Random.Range(0, 3); break;
+			}
 
 			// Debug.Log("race: "+customCharacter.race+"; eyes: "+customCharacter.neutralSet[0]+"; mouth: "+customCharacter.neutralSet[1]+"; haircut: "+customCharacterHairCut+"; dress: "+customCharacterDress+"; name: "+customCharacterName+"; type: "+customCharacter.type);
 
@@ -117,7 +128,14 @@ public class CharacterManager : MonoBehaviour {
 			customCharacter.neutralSet.Add(maleForeArmsPool[Random.Range(0, maleForeArmsPool.Count-1)]);
 
 			customCharacter.name = maleNamePool[Random.Range(0, maleNamePool.Count-1)];
-			customCharacter.type = (Type)Random.Range(0, 5); //TODO get all types
+			
+			switch(GameManager.singleton.difficulty)
+			{
+				case GameManager.Difficulty.Easy: customCharacter.type = (Type)Random.Range(0, 1); break;
+				case GameManager.Difficulty.Normal: customCharacter.type = (Type)Random.Range(0, 3); break;
+				case GameManager.Difficulty.Hard: customCharacter.type = (Type)Random.Range(0, 5); break;
+				default: customCharacter.type = (Type)Random.Range(0, 3); break;
+			}
 
 			// Debug.Log("race: "+customCharacter.race+"; eyes: "+customCharacter.neutralSet[0]+"; mouth: "+customCharacter.neutralSet[1]+"; haircut: "+customCharacterHairCut+"; dress: "+customCharacterDress+"; name: "+customCharacterName+"; type: "+customCharacter.type);
 
@@ -477,9 +495,17 @@ public class CharacterManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		int playerToCreate;
+		switch(GameManager.singleton.difficulty)
+		{
+			case GameManager.Difficulty.Easy: playerToCreate = 5; break;
+			case GameManager.Difficulty.Normal: playerToCreate = 10; break;
+			case GameManager.Difficulty.Hard: playerToCreate = 15; break;
+			default: playerToCreate = 10; break;
+		}
 		// GameManager.singleton.
-		CreateRandomChar();
-		customCharacter = null;
+		for(var i = 0; i< playerToCreate; i++)
+			CreateRandomChar();
 	}
 	
 	// Update is called once per frame

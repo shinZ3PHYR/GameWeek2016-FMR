@@ -9,6 +9,15 @@ public class GameManager : MonoBehaviour {
     public bool MEC = false;
     public bool MEUF;
 
+    public enum Difficulty
+    {
+        Easy,
+        Normal,
+        Hard
+    }
+
+    public Difficulty difficulty = Difficulty.Normal;
+
     void Awake()
     {
         if (singleton != null)
@@ -18,7 +27,8 @@ public class GameManager : MonoBehaviour {
     }
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
         DontDestroyOnLoad(this);
 	}
 	
