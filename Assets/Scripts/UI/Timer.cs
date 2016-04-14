@@ -21,6 +21,7 @@ public class Timer : MonoBehaviour
     void OnEnable()
     {
         _slider.value = 1;
+
     }
 
     // Update is called once per frame
