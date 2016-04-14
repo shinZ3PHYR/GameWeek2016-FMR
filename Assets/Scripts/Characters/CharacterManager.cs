@@ -40,24 +40,28 @@ public class CharacterManager : MonoBehaviour {
 	public List<string> wayOfLifePool = new List<string>();
 	public List<string> hobbiesPool = new List<string>();
 
-	public List<Sprite> femaleFacePool = new List<Sprite>();
+	public List<string> bodyColorPool = new List<string>();
+
 	public List<Sprite> femaleEyesPool = new List<Sprite>();
 	public List<Sprite> femaleMouthesPool = new List<Sprite>();
 	public List<Sprite> femaleHairCutPool = new List<Sprite>();
 	public List<Sprite> femaleDressPool = new List<Sprite>();
 	// public List<Sprite> accessoryPool = new List<Sprite>();
 	public List<Sprite> femaleForeArmsPool = new List<Sprite>();
+	public List<Sprite> femaleBodyPool = new List<Sprite>();
+	public List<Sprite> femaleFacePool = new List<Sprite>();
 	public List<string> femaleNamePool = new List<string>();
 
 	public List<Sprite> femaleMoodPool = new List<Sprite>();
 
-	public List<Sprite> maleFacePool = new List<Sprite>();
 	public List<Sprite> maleEyesPool = new List<Sprite>();
 	public List<Sprite> maleMouthesPool = new List<Sprite>();
 	public List<Sprite> maleHairCutPool = new List<Sprite>();
 	public List<Sprite> maleDressPool = new List<Sprite>();
 	// public List<Sprite> accessoryPool = new List<Sprite>();
 	public List<Sprite> maleForeArmsPool = new List<Sprite>();
+	public List<Sprite> maleBodyPool = new List<Sprite>();
+	public List<Sprite> maleFacePool = new List<Sprite>();
 	public List<string> maleNamePool = new List<string>();
 
 	public List<Sprite> maleMoodPool = new List<Sprite>();
@@ -74,7 +78,7 @@ public class CharacterManager : MonoBehaviour {
 		}
 
 		GameObject EmptyChar = GameObject.Instantiate(genericCharacterPrefab, charaPos.position, Quaternion.identity) as GameObject;
-		EmptyChar.transform.parent = GameObject.Find("Canvas").transform;
+		EmptyChar.transform.parent = GameObject.Find("Characters").transform;
 		customCharacter = EmptyChar.GetComponent<Character>();
 
 		customCharacter.charaPos = charaPos;
@@ -102,7 +106,14 @@ public class CharacterManager : MonoBehaviour {
 			customCharacter.neutralSet.Add(femaleMouthesPool[Random.Range(0, femaleMouthesPool.Count-1)]);
 			customCharacter.neutralSet.Add(femaleHairCutPool[Random.Range(0, femaleHairCutPool.Count-1)]);
 			customCharacter.neutralSet.Add(femaleDressPool[Random.Range(0, femaleDressPool.Count-1)]);
-			customCharacter.neutralSet.Add(femaleForeArmsPool[Random.Range(0, femaleForeArmsPool.Count-1)]);
+			customCharacter.bodyColor = bodyColorPool[Random.Range(0, bodyColorPool.Count-1)];
+			
+			// Sprite temp = femaleForeArmsPool.Find(item=>(item.name.Contains(customCharacter.bodyColor)));
+			
+			customCharacter.foreArms = femaleForeArmsPool.Find(item=>(item.name.Contains(customCharacter.bodyColor)));
+			customCharacter.body = femaleBodyPool.Find(item=>(item.name.Contains(customCharacter.bodyColor)));
+			customCharacter.faceShape = femaleFacePool.Find(item=>(item.name.Contains(customCharacter.bodyColor)));
+
 
 			customCharacter.name = femaleNamePool[Random.Range(0, femaleNamePool.Count-1)];
 
@@ -120,7 +131,7 @@ public class CharacterManager : MonoBehaviour {
 			
 			GetAssociatedSet(customCharacter.type, customCharacter.neutralSet);
 
-			customCharacter.DrawNeutralChar();
+			customCharacter.DrawNeutralChar(); //TODO débrancher drawneutralchar
 		}
 		else
 		{

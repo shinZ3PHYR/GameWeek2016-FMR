@@ -23,12 +23,12 @@ public class Character : MonoBehaviour {
 	private AnimationCurve scaleCurveBis;
 
 	public Sprite faceShape;
-	public Sprite eyes;
-	public Sprite mouth;
+	public Sprite foreArms;
+	public Sprite body;
 	public Sprite nose;
-	public Sprite hairCut;
 	public Sprite accessory;
 	public Color eyesColor;
+	public string bodyColor;
 
 	public List<Sprite> neutralSet = new List<Sprite>();
 	public List<Sprite> happySet = new List<Sprite>();
@@ -71,8 +71,8 @@ public class Character : MonoBehaviour {
 		transform.GetChild(3).GetComponent<Image>().sprite = nose;
 		transform.GetChild(4).GetComponent<Image>().sprite = neutralSet[2]; //hairCut
 		transform.GetChild(5).GetComponent<Image>().sprite = neutralSet[3]; //Dress
-		transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[4]; //ForeArm
-
+		transform.GetChild(6).GetComponent<Image>().sprite = foreArms;
+		transform.GetChild(7).GetComponent<Image>().sprite = body;
 		Appear();
 	}
 
@@ -139,7 +139,7 @@ public class Character : MonoBehaviour {
 
 	public void SpawnParticles()
 	{
-		
+
 	}
 
 	public void ChangeMood(Mood mood)
@@ -152,7 +152,7 @@ public class Character : MonoBehaviour {
 				transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0]; //eyes
 				transform.GetChild(1).GetComponent<Image>().color = eyesColor;
 				transform.GetChild(2).GetComponent<Image>().sprite = neutralSet[1]; //mouth
-				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[4]; //ForeArm
+				// transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[4]; //ForeArm
 				break;
 			case Mood.VeryHappy:
 				transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
@@ -186,6 +186,6 @@ public class Character : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		ChangeMood(currentMood);
+		// ChangeMood(currentMood);
 	}
 }
