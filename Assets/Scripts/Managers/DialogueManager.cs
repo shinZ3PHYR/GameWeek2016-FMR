@@ -19,6 +19,9 @@ public class DialogueManager : MonoBehaviour {
     public delegate void RetourAction(string retour);
     public static event RetourAction OnReturnRetour;
 
+    public delegate void MoodAction(Character.Mood mood);
+    public static event MoodAction SendMood;
+
     private Character currentChar;
     private int currentType;
     public List<string> likeList;
@@ -50,7 +53,7 @@ public class DialogueManager : MonoBehaviour {
     public List<string> Retours;
     private List<string> retours;
 
-   
+    private bool currentCategorieIsLiked;
 
 	// Use this for initialization
 	void Start () {
@@ -83,7 +86,7 @@ public class DialogueManager : MonoBehaviour {
         GameManager.OnNewFlirt += NewAccroche;
         DialogueBoxManager.OnQuestion += NewQuestion;
         DialogueBoxManager.OnResponse += NewResponses;
-        HudManager.OnArgument += NewArguments;
+        HudManager.OnArgument += PrepareMood;
         HudManager.OnRetour += NewRetours;
         
         
@@ -157,15 +160,19 @@ public class DialogueManager : MonoBehaviour {
         {
             case 0:
                 categorie = likeList[0];
+                currentCategorieIsLiked = true;
                 break;
             case 1:
                 categorie = likeList[1];
+                currentCategorieIsLiked = true;
                 break;
             case 2:
                 categorie = dislikeList[0];
+                currentCategorieIsLiked = false;
                 break;
             case 3:
                 categorie = dislikeList[1];
+                currentCategorieIsLiked = false;
                 break;
         }
         question = questionsCategories[categorie];
@@ -181,7 +188,54 @@ public class DialogueManager : MonoBehaviour {
         }
         OnReturnResponses(responses);
     }
-
+    void PrepareMood(string chosenResponse, int buttonNb)
+    {
+        if(currentCategorieIsLiked)
+        {
+            switch (buttonNb)
+            {
+                case 0:
+                    SendMood(Character.Mood.Veryhappy);
+                    GameManager.singleton.currentLoveMetre += 2;
+                    break;
+                case 1:
+                    SendMood(Character.Mood.Happy);
+                    GameManager.singleton.currentLoveMetre += 1;
+                    break;
+                case 2:
+                    SendMood(Character.Mood.Hangry);
+                    GameManager.singleton.currentLoveMetre -= 1;
+                    break;
+                case 3:
+                    SendMood(Character.Mood.Veryhangry);
+                    GameManager.singleton.currentLoveMetre -= 2;
+                    break;
+            }
+        }
+        else
+        {
+            switch (buttonNb)
+            {
+                case 0:
+                    SendMood(Character.Mood.Veryhangry);
+                    GameManager.singleton.currentLoveMetre -= 2;
+                    break;
+                case 1:
+                    SendMood(Character.Mood.Hangry);
+                    GameManager.singleton.currentLoveMetre -= 1;
+                    break;
+                case 2:
+                    SendMood(Character.Mood.Happy);
+                    GameManager.singleton.currentLoveMetre += 1;
+                    break;
+                case 3:
+                    SendMood(Character.Mood.Veryhappy);
+                    GameManager.singleton.currentLoveMetre += 2;
+                    break;
+            }
+        }
+        NewArguments(chosenResponse);
+    }
     void NewArguments(string chosenResponse)
     {
         arguments = new List<string>();

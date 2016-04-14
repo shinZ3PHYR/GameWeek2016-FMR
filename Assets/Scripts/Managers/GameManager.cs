@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     public bool MEUF;
 
     public List<Character> charList = new List<Character>();
+    public int currentLoveMetre;
 
     public enum Difficulty
     {
