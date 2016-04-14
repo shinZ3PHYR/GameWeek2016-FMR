@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
     public static GameManager singleton;
-    public GameObject currentChar;
+    public Character currentChar;
+    private int charIndex = 0;
+
 
     public bool MEC = false;
     public bool MEUF;
+
+    public List<Character> charList = new List<Character>();
 
     public enum Difficulty
     {
@@ -30,8 +35,13 @@ public class GameManager : MonoBehaviour {
 	void Start () 
     {
         DontDestroyOnLoad(this);
+        CharacterManager.OnCreatedCharaList += getCurrentChar;
 	}
 	
+    public void getCurrentChar()
+    {
+        currentChar = charList[charIndex];
+    }
 	// Update is called once per frame
 	void Update () {
 	
