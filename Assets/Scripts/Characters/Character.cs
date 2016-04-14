@@ -100,17 +100,17 @@ public class Character : MonoBehaviour {
 		}
 	}
 
-	// IEnumerator TweenFade(float fadeTime)
-	// {
-	// 	float elapsedTime = 0;
-	// 	while(uiImage.color.a < 1)
-	// 	{
-	// 		float fadeRatio = elapsedTime / fadeTime;
-	// 		color= new Color(1,1,1, fadeRatio);
-	// 		elapsedTime+= Time.deltaTime;
-	// 		yield return null;
-	// 	}
-	// }
+	IEnumerator TweenFade(float fadeTime)
+	{
+		float elapsedTime = 0;
+		// while(uiImage.color.a < 1)
+		// {
+		// 	float fadeRatio = elapsedTime / fadeTime;
+		// 	color= new Color(1,1,1, fadeRatio);
+		// 	elapsedTime+= Time.deltaTime;
+			yield return null;
+		// }
+	}
 
 	public void Appear()
 	{
