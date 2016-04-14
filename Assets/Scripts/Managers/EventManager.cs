@@ -12,8 +12,6 @@ public class EventManager : MonoBehaviour {
 
     public delegate void CharAction();
     public static event CharAction OnNewFlirt;
-    public static event CharAction OnQuestion;
-    public static event CharAction OnResponse;
 
     public delegate void CharActionParam(string chosenOne);
     public static event CharActionParam OnArgument;
@@ -28,9 +26,14 @@ public class EventManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Submit"))
         {
             OnMenu();
+        }
+        if (Input.GetButtonDown("Cancel"))
+        {
+            OnNewFlirt();
+            Debug.Log("event!");
         }
         if (Input.GetAxis("Vertical") != 0)
         {

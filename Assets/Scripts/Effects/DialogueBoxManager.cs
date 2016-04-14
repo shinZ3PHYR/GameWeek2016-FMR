@@ -16,15 +16,39 @@ public class DialogueBoxManager : MonoBehaviour {
 
 	public Text uiText;
 
+    public delegate void CharActionQ();
+    public static event CharActionQ OnQuestion;
+
+    public delegate void CharActionR();
+    public static event CharActionR OnResponse;
+
 	// Use this for initialization
 	void Start () {
-		
+        DialogueManager.OnReturnAccroche += SetCurrentAccroche;
+        DialogueManager.OnReturnQuestion += SetCurrentQuestion;
+        
+        //DialogueManager.OnReturnRetours += NewRetours;
+
 		uiText = GetComponent<Text>();
-		text = dialList[dialogueIndex];
+		//text = dialList[dialogueIndex];
        
      	StartCoroutine(LetterPop(text, textSpeed));
      
 	}
+    void SetCurrentAccroche(string dialString)
+    {
+        dialList.Add(dialString);
+        //dialList.Add("Je m'appel" + GameManager.singleton.currentChar.name);
+        dialList.Add("alors...");
+        //EraseText();
+        //StartCoroutine(LetterPop(dialList[0], textSpeed));
+        OnQuestion();
+    }
+    void SetCurrentQuestion(string dialString)
+    {
+        dialList.Add(dialString);
+        OnResponse();
+    }
 
 	public void NextDialogue()
 	{
@@ -34,6 +58,7 @@ public class DialogueBoxManager : MonoBehaviour {
 				dialogueIndex++;
 			}
 			EraseText();
+
 			SwitchText(dialList[dialogueIndex]);
 			LaunchRoutine();
 
