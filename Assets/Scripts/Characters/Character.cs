@@ -23,12 +23,12 @@ public class Character : MonoBehaviour {
 	private AnimationCurve scaleCurveBis;
 
 	public Sprite faceShape;
-	public Sprite eyes;
-	public Sprite mouth;
+	public Sprite foreArms;
+	public Sprite body;
 	public Sprite nose;
-	public Sprite hairCut;
 	public Sprite accessory;
 	public Color eyesColor;
+	public string bodyColor;
 
 	public List<Sprite> neutralSet = new List<Sprite>();
 	public List<Sprite> happySet = new List<Sprite>();
@@ -139,7 +139,7 @@ public class Character : MonoBehaviour {
 
 	public void SpawnParticles()
 	{
-		
+
 	}
 
 	public void ChangeMood(Mood mood)
@@ -152,7 +152,7 @@ public class Character : MonoBehaviour {
 				transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0]; //eyes
 				transform.GetChild(1).GetComponent<Image>().color = eyesColor;
 				transform.GetChild(2).GetComponent<Image>().sprite = neutralSet[1]; //mouth
-				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[4]; //ForeArm
+				// transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[4]; //ForeArm
 				break;
 			case Mood.VeryHappy:
 				transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
