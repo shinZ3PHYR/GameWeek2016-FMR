@@ -27,6 +27,7 @@ public class Character : MonoBehaviour {
 	public Sprite body;
 	public Sprite hairCutFront;
 	public Sprite nose;
+	public Sprite dress;
 	public Sprite accessory;
 	public Color eyesColor;
 	public string bodyColor;
@@ -54,12 +55,15 @@ public class Character : MonoBehaviour {
 
 	public void EraseChar()
 	{
-		transform.GetChild(0).GetComponent<Image>().sprite = faceShape;
+		transform.GetChild(2).GetComponent<Image>().sprite = faceShape;
+		transform.GetChild(5).GetComponent<Image>().sprite = nose;
+		transform.GetChild(4).GetComponent<Image>().sprite = foreArms;
+		transform.GetChild(9).GetComponent<Image>().sprite = hairCutFront;
+		transform.GetChild(3).GetComponent<Image>().sprite = dress; //Dress
+
 		transform.GetChild(1).GetComponent<Image>().sprite = null; //eyes
 
-		transform.GetChild(3).GetComponent<Image>().sprite = nose;
 		transform.GetChild(4).GetComponent<Image>().sprite = null; //hairCut
-		transform.GetChild(5).GetComponent<Image>().sprite = null; //Dress
 		transform.GetChild(6).GetComponent<Image>().sprite = null; //ForeArm
 	}
 
@@ -71,8 +75,8 @@ public class Character : MonoBehaviour {
 		transform.GetChild(7).GetComponent<Image>().sprite = neutralSet[1]; //mouth
 		transform.GetChild(5).GetComponent<Image>().sprite = nose;
 		transform.GetChild(0).GetComponent<Image>().sprite = neutralSet[2]; //hairCut
-		transform.GetChild(3).GetComponent<Image>().sprite = neutralSet[3]; //Dress
-		transform.GetChild(4).GetComponent<Image>().sprite = foreArms;
+		transform.GetChild(4).GetComponent<Image>().sprite = dress; //Dress
+		transform.GetChild(3).GetComponent<Image>().sprite = foreArms;
 		transform.GetChild(1).GetComponent<Image>().sprite = body;
 		transform.GetChild(8).GetComponent<Image>().sprite = hairCutFront;
 		Appear();

@@ -108,7 +108,7 @@ public class CharacterManager : MonoBehaviour {
 			customCharacter.neutralSet.Add(femaleMouthesPool[Random.Range(0, femaleMouthesPool.Count-1)]);
 			customCharacter.neutralSet.Add(femaleHairCutPool[Random.Range(0, femaleHairCutPool.Count-1)]);
 			customCharacter.hairCutFront = femaleHairCutFrontPool[Random.Range(0, femaleHairCutFrontPool.Count-1)];
-			customCharacter.neutralSet.Add(femaleDressPool[Random.Range(0, femaleDressPool.Count-1)]);
+			customCharacter.dress = femaleDressPool[Random.Range(0, femaleDressPool.Count-1)];
 			customCharacter.bodyColor = bodyColorPool[Random.Range(0, bodyColorPool.Count-1)];
 			
 			// Sprite temp = femaleForeArmsPool.Find(item=>(item.name.Contains(customCharacter.bodyColor)));
