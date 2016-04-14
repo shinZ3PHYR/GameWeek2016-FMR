@@ -7,6 +7,9 @@ using System.Linq;
 
 public class CharacterManager : MonoBehaviour {
 
+	public delegate void ListAction();
+    public static event ListAction OnCreatedCharaList;
+
 	public enum Type
 	{
 		Shy,
@@ -136,7 +139,8 @@ public class CharacterManager : MonoBehaviour {
 				case GameManager.Difficulty.Hard: customCharacter.type = (Type)Random.Range(0, 5); break;
 				default: customCharacter.type = (Type)Random.Range(0, 3); break;
 			}
-
+			SetLikes();
+			SetDislikes();
 			// Debug.Log("race: "+customCharacter.race+"; eyes: "+customCharacter.neutralSet[0]+"; mouth: "+customCharacter.neutralSet[1]+"; haircut: "+customCharacterHairCut+"; dress: "+customCharacterDress+"; name: "+customCharacterName+"; type: "+customCharacter.type);
 
 			charaList.Add(customCharacter);
@@ -144,6 +148,7 @@ public class CharacterManager : MonoBehaviour {
 			GetAssociatedSet(customCharacter.type, customCharacter.neutralSet);
 
 			customCharacter.DrawNeutralChar();
+			
 		}
 		// customCharacter.faceShape = facePool[Random.Range(0, facePool.Count-1)];
 	}
@@ -229,267 +234,7 @@ public class CharacterManager : MonoBehaviour {
 		}
 		while(customCharacter.dislikeList[0] != customCharacter.likeList[0] && customCharacter.dislikeList[0] != customCharacter.likeList[1] && customCharacter.dislikeList[1] != customCharacter.likeList[0] && customCharacter.dislikeList[1] != customCharacter.likeList[1]);
 	}
-	// public void GetShyHappySet(List<Sprite> spriteList)
-	// {
-	// 	// for(int i = 0; i<spriteList.Count; i++)
-	// 	// {
-	// 	// 	Debug.Log(spriteList[i]);
-	// 	// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-	// 	// 	// Sprite happyShyForeArms = 
-	// 	// }
 
-	// 	customCharacter.happySet[1] = femaleMoodPool.Find(item=>(item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-
-	// }
-
-// 	public void GetShyAngrySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.angrySet[1] = femaleMoodPool.Find(item=>(item.name.Contains("Mouth")&&item.name.Contains("Angry")));
-// 	}
-
-// 	public void GetShyVeryHappySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.veryHappySet[1] = femaleMoodPool.Find(item=>(item.name.Contains("Mouth")&&item.name.Contains("VeryHappy")));
-// 	}
-
-// 	public void GetShyVeryAngrySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.veryAngrySet[1] = femaleMoodPool.Find(item=>(item.name.Contains("Mouth")&&item.name.Contains("VeryAngry")));
-// 	}
-// //Haughty Set
-// 	public void GetHaughtyHappySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.happySet[1] = femaleMoodPool.Find(item=>(item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 	}
-
-// 	public void GetHaughtyAngrySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.angrySet[1] = femaleMoodPool.Find(item=>(item.name.Contains("Mouth")&&item.name.Contains("Angry")));
-// 	}
-
-// 	public void GetHaughtyVeryHappySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.veryHappySet[1] = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("VeryHappy")));
-// 	}
-
-// 	public void GetHaughtyVeryAngrySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.veryAngrySet[1] = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("VeryAngry")));
-// 	}
-
-// //HungUp Set
-// 	public void GetHungUpHappySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.happySet[1] = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 	}
-
-// 	public void GetHungUpAngrySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.angrySet[1] = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Angry")));
-// 	}
-
-// 	public void GetHungUpVeryHappySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.veryHappySet[1] = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("VeryHappy")));
-// 	}
-
-// 	public void GetHungUpVeryAngrySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.veryAngrySet[1] = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("VeryAngry")));
-// 	}	
-
-// //Tomboy Set
-// 	public void GetTomboyHappySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.happySet[1] = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 	}
-
-// 	public void GetTomboyAngrySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.angrySet[1] = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Angry")));
-// 	}
-
-// 	public void GetTomboyVeryHappySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.veryHappySet[1] = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("VeryHappy")));
-// 	}
-
-// 	public void GetTomboyVeryAngrySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 		customCharacter.veryAngrySet[1] = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("VeryAngry")));
-// 	}
-
-// //Seductive Set
-// 	public void GetSeductiveHappySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 	}
-
-// 	public void GetSeductiveAngrySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 	}
-
-// 	public void GetSeductiveVeryHappySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 	}
-
-// 	public void GetSeductiveVeryAngrySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 	}
-
-// //Bipolar Set
-// 	public void GetBipolarHappySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 	}
-
-// 	public void GetBipolarAngrySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 	}
-
-// 	public void GetBipolarVeryHappySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 	}
-
-// 	public void GetBipolarVeryAngrySet(List<Sprite> spriteList)
-// 	{
-// 		// for(int i = 0; i<spriteList.Count; i++)
-// 		// {
-// 		// 	Debug.Log(spriteList[i]);
-// 		// 	// Sprite happyShyEyes = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Eyes")&&item.name.Contains("Happy")));
-// 		// 	// Sprite happyShyMouth = femaleMoodPool.Find(item=>(item.name.Contains(spriteList[i])&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));
-// 		// }
-// 	}
 
 
 	// Use this for initialization
@@ -506,6 +251,10 @@ public class CharacterManager : MonoBehaviour {
 		// GameManager.singleton.
 		for(var i = 0; i< playerToCreate; i++)
 			CreateRandomChar();
+
+		if(charaList!=null)
+			GameManager.singleton.charList = charaList;
+			OnCreatedCharaList();
 	}
 	
 	// Update is called once per frame

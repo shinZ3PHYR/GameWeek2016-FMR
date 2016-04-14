@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour {
     public delegate void RetourAction(string retour);
     public static event RetourAction OnReturnRetour;
 
-    private GameObject currentChar;
+    private Character currentChar;
     private int currentType;
     public List<string> likeList;
     public List<string> dislikeList;
@@ -100,10 +100,9 @@ public class DialogueManager : MonoBehaviour {
     void NewAccroche()
     {
         currentChar = GameManager.singleton.currentChar;
-        //currentType = currentChar.GetComponent<Character>().type;
-        currentType = 0;
-        //likeList = currentChar.GetComponent<Character>().likeList;
-        //dislikeList = currentChar.GetComponent<Character>().dislikeList;
+        currentType = (int) currentChar.type;
+        likeList = currentChar.likeList;
+        dislikeList = currentChar.dislikeList;
 
         rdmValue = Random.Range(0, 10);
         rdmChance = Random.Range(0, 1);
