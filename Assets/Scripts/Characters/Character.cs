@@ -49,7 +49,7 @@ public class Character : MonoBehaviour {
 
 	void Start ()
 	{
-
+		DialogueManager.SendMood += ChangeMood;
 	}
 
 	public void EraseChar()
@@ -156,7 +156,7 @@ public class Character : MonoBehaviour {
 				transform.GetChild(7).GetComponent<Image>().sprite = neutralSet[1]; //mouth
 				// transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[4]; //ForeArm
 				break;
-			case Mood.VeryHappy:
+			case Mood.Veryhappy:
 				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
 				transform.GetChild(6).GetComponent<Image>().color = eyesColor;
 				// transform.GetChild(1).GetComponent<Image>().sprite = veryHappySet[0]; //eyes
@@ -170,7 +170,7 @@ public class Character : MonoBehaviour {
 				transform.GetChild(7).GetComponent<Image>().sprite = happySet[0]; //mouth
 				// transform.GetChild(6).GetComponent<Image>().sprite = happySet[2]; //ForeArm
 				break;
-			case Mood.VeryAngry:
+			case Mood.Veryangry:
 				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
 				transform.GetChild(6).GetComponent<Image>().color = eyesColor;
 				// transform.GetChild(1).GetComponent<Image>().sprite = veryAngrySet[0]; //eyes
