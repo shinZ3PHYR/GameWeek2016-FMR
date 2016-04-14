@@ -8,10 +8,10 @@ public class Character : MonoBehaviour {
 	public enum Mood
 	{
 		Happy,
-		VeryHappy,
+		Veryhappy,
 		Neutral,
 		Angry,
-		VeryAngry
+		Veryangry
 	}
 
 	public Mood currentMood = Mood.Neutral;
@@ -25,6 +25,7 @@ public class Character : MonoBehaviour {
 	public Sprite faceShape;
 	public Sprite foreArms;
 	public Sprite body;
+	public Sprite hairCutFront;
 	public Sprite nose;
 	public Sprite accessory;
 	public Color eyesColor;
@@ -73,7 +74,7 @@ public class Character : MonoBehaviour {
 		transform.GetChild(3).GetComponent<Image>().sprite = neutralSet[3]; //Dress
 		transform.GetChild(4).GetComponent<Image>().sprite = foreArms;
 		transform.GetChild(1).GetComponent<Image>().sprite = body;
-		transform.GetChild(8).GetComponent<Image>().sprite = null;
+		transform.GetChild(8).GetComponent<Image>().sprite = hairCutFront;
 		Appear();
 	}
 
@@ -118,7 +119,7 @@ public class Character : MonoBehaviour {
 	public void Appear()
 	{
 		transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-		StartCoroutine(TweenTranslate(1f));
+		StartCoroutine(TweenTranslate(0.75f));
 	}
 
 	public void Flip()
@@ -150,37 +151,37 @@ public class Character : MonoBehaviour {
 		{
 			case Mood.Neutral:
 
-				transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0]; //eyes
-				transform.GetChild(1).GetComponent<Image>().color = eyesColor;
-				transform.GetChild(2).GetComponent<Image>().sprite = neutralSet[1]; //mouth
+				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[0]; //eyes
+				transform.GetChild(6).GetComponent<Image>().color = eyesColor;
+				transform.GetChild(7).GetComponent<Image>().sprite = neutralSet[1]; //mouth
 				// transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[4]; //ForeArm
 				break;
 			case Mood.VeryHappy:
-				transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
-				transform.GetChild(1).GetComponent<Image>().color = eyesColor;
+				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
+				transform.GetChild(6).GetComponent<Image>().color = eyesColor;
 				// transform.GetChild(1).GetComponent<Image>().sprite = veryHappySet[0]; //eyes
-				transform.GetChild(2).GetComponent<Image>().sprite = veryHappySet[0]; //mouth
+				transform.GetChild(8).GetComponent<Image>().sprite = veryHappySet[0]; //mouth
 				// transform.GetChild(6).GetComponent<Image>().sprite = veryHappySet[2]; //ForeArm
 				break;
 			case Mood.Happy:
-				transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
-				transform.GetChild(1).GetComponent<Image>().color = eyesColor;
+				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
+				transform.GetChild(6).GetComponent<Image>().color = eyesColor;
 				// transform.GetChild(1).GetComponent<Image>().sprite = happySet[0]; //eyes
-				transform.GetChild(2).GetComponent<Image>().sprite = happySet[0]; //mouth
+				transform.GetChild(7).GetComponent<Image>().sprite = happySet[0]; //mouth
 				// transform.GetChild(6).GetComponent<Image>().sprite = happySet[2]; //ForeArm
 				break;
 			case Mood.VeryAngry:
-				transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
-				transform.GetChild(1).GetComponent<Image>().color = eyesColor;
+				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
+				transform.GetChild(6).GetComponent<Image>().color = eyesColor;
 				// transform.GetChild(1).GetComponent<Image>().sprite = veryAngrySet[0]; //eyes
-				transform.GetChild(2).GetComponent<Image>().sprite = veryAngrySet[0]; //mouth
+				transform.GetChild(7).GetComponent<Image>().sprite = veryAngrySet[0]; //mouth
 				// transform.GetChild(6).GetComponent<Image>().sprite = veryAngrySet[2]; //ForeArm
 				break;
 			case Mood.Angry:
-				transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
-				transform.GetChild(1).GetComponent<Image>().color = eyesColor;
+				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
+				transform.GetChild(6).GetComponent<Image>().color = eyesColor;
 				// transform.GetChild(1).GetComponent<Image>().sprite = angrySet[0]; //eyes
-				transform.GetChild(2).GetComponent<Image>().sprite = angrySet[0]; //mouth
+				transform.GetChild(7).GetComponent<Image>().sprite = angrySet[0]; //mouth
 				// transform.GetChild(6).GetComponent<Image>().sprite = angrySet[2]; //ForeArm
 				break;
 		}

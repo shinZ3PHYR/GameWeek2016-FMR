@@ -45,6 +45,8 @@ public class CharacterManager : MonoBehaviour {
 	public List<Sprite> femaleEyesPool = new List<Sprite>();
 	public List<Sprite> femaleMouthesPool = new List<Sprite>();
 	public List<Sprite> femaleHairCutPool = new List<Sprite>();
+	public List<Sprite> femaleHairCutFrontPool = new List<Sprite>();
+
 	public List<Sprite> femaleDressPool = new List<Sprite>();
 	// public List<Sprite> accessoryPool = new List<Sprite>();
 	public List<Sprite> femaleForeArmsPool = new List<Sprite>();
@@ -105,6 +107,7 @@ public class CharacterManager : MonoBehaviour {
 			customCharacter.eyesColor = new Color(Random.Range(.4f, 1), Random.Range(.4f, 1), Random.Range(.4f, 1));
 			customCharacter.neutralSet.Add(femaleMouthesPool[Random.Range(0, femaleMouthesPool.Count-1)]);
 			customCharacter.neutralSet.Add(femaleHairCutPool[Random.Range(0, femaleHairCutPool.Count-1)]);
+			customCharacter.hairCutFront = femaleHairCutFrontPool[Random.Range(0, femaleHairCutFrontPool.Count-1)];
 			customCharacter.neutralSet.Add(femaleDressPool[Random.Range(0, femaleDressPool.Count-1)]);
 			customCharacter.bodyColor = bodyColorPool[Random.Range(0, bodyColorPool.Count-1)];
 			
