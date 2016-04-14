@@ -64,15 +64,16 @@ public class Character : MonoBehaviour {
 
 	public void DrawNeutralChar()
 	{
-		transform.GetChild(0).GetComponent<Image>().sprite = faceShape;
-		transform.GetChild(1).GetComponent<Image>().sprite = neutralSet[0]; //eyes
-		transform.GetChild(1).GetComponent<Image>().color = eyesColor;
-		transform.GetChild(2).GetComponent<Image>().sprite = neutralSet[1]; //mouth
-		transform.GetChild(3).GetComponent<Image>().sprite = nose;
-		transform.GetChild(4).GetComponent<Image>().sprite = neutralSet[2]; //hairCut
-		transform.GetChild(5).GetComponent<Image>().sprite = neutralSet[3]; //Dress
-		transform.GetChild(6).GetComponent<Image>().sprite = foreArms;
-		transform.GetChild(7).GetComponent<Image>().sprite = body;
+		transform.GetChild(2).GetComponent<Image>().sprite = faceShape;
+		transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[0]; //eyes
+		transform.GetChild(6).GetComponent<Image>().color = eyesColor;
+		transform.GetChild(7).GetComponent<Image>().sprite = neutralSet[1]; //mouth
+		transform.GetChild(5).GetComponent<Image>().sprite = nose;
+		transform.GetChild(0).GetComponent<Image>().sprite = neutralSet[2]; //hairCut
+		transform.GetChild(3).GetComponent<Image>().sprite = neutralSet[3]; //Dress
+		transform.GetChild(4).GetComponent<Image>().sprite = foreArms;
+		transform.GetChild(1).GetComponent<Image>().sprite = body;
+		transform.GetChild(8).GetComponent<Image>().sprite = null;
 		Appear();
 	}
 
