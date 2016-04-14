@@ -20,9 +20,9 @@ public class DialogueManager : MonoBehaviour {
     public static event RetourAction OnReturnRetours;
 
     private GameObject currentChar;
-    private string currentType;
-    private List<string> likeList;
-    private List<string> dislikeList;
+    private int currentType;
+    public List<string> likeList;
+    public List<string> dislikeList;
 
     private int rdmValue;
     private int rdmChance;
@@ -79,8 +79,8 @@ public class DialogueManager : MonoBehaviour {
 
         currentChar = GameManager.singleton.currentChar;
         EventManager.OnNewFlirt += NewAccroche;
-        EventManager.OnQuestion += NewQuestion;
-        EventManager.OnResponse += NewResponses;
+        DialogueBoxManager.OnQuestion += NewQuestion;
+        DialogueBoxManager.OnResponse += NewResponses;
         EventManager.OnArgument += NewArguments;
         EventManager.OnRetour += NewRetours;
         
@@ -100,52 +100,53 @@ public class DialogueManager : MonoBehaviour {
     {
         currentChar = GameManager.singleton.currentChar;
         //currentType = currentChar.GetComponent<Character>().type;
+        currentType = 0;
         //likeList = currentChar.GetComponent<Character>().likeList;
         //dislikeList = currentChar.GetComponent<Character>().dislikeList;
 
         rdmValue = Random.Range(0, 10);
         rdmChance = Random.Range(0, 1);
         accroche = accroches[rdmValue];
-        //switch (currentType)
-        //{
-        //    case 0:
-        //        if (rdmChance == 0)
-        //        {
-        //          accroche = accroches[0];
-        //        }
-        //        break;
-        //    case 1:
-        //        if (rdmChance == 0)
-        //        {
-        //          accroche = accroches[1];
-        //        }
-        //        break;
-        //    case 2:
-        //        if (rdmChance == 0)
-        //        {
-        //          accroche = accroches[2];
-        //        }
-        //        break;
-        //    case 3:
-        //        if (rdmChance == 0)
-        //        {
-        //          accroche = accroches[3];
-        //        }
-        //        break;
-        //    case 4:
-        //        if (rdmChance == 0)
-        //        {
-        //          accroche = accroches[4];
-        //        }
-        //        break;
-        //    case 5:
-        //        if (rdmChance == 0)
-        //        {
-        //          accroche = accroches[5];
-        //        }
-        //        break;
-        //}
-        //EventManager.OnReturnAccroche(accroche);
+        switch (currentType)
+        {
+            case 0:
+                if (rdmChance == 0)
+                {
+                  accroche = accroches[0];
+                }
+                break;
+            case 1:
+                if (rdmChance == 0)
+                {
+                  accroche = accroches[1];
+                }
+                break;
+            case 2:
+                if (rdmChance == 0)
+                {
+                  accroche = accroches[2];
+                }
+                break;
+            case 3:
+                if (rdmChance == 0)
+                {
+                  accroche = accroches[3];
+                }
+                break;
+            case 4:
+                if (rdmChance == 0)
+                {
+                  accroche = accroches[4];
+                }
+                break;
+            case 5:
+                if (rdmChance == 0)
+                {
+                  accroche = accroches[5];
+                }
+                break;
+        }
+        OnReturnAccroche(accroche);
     }
 
     void NewQuestion()

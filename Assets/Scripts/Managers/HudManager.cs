@@ -1,18 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class HudManager : MonoBehaviour {
 
     public Transform menu;
     public Image hud;
+    public Text button1;
+    public Text button2;
+    public Text button3;
+    public Text button4;
 
     private Vector3 hudPosition;
+    private List<string> ResponsesList;
+    private List<string> ArgumentsList;
 
 	// Use this for initialization
 	void Start () {
         EventManager.OnMenu += ShowMenu;
         EventManager.OnUI += ShowHud;
+
+        DialogueManager.OnReturnResponses += NewResponses;
+        //DialogueManager.OnReturnArguments += NewArguments;
 
         menu.gameObject.SetActive(false);
 
@@ -23,7 +33,13 @@ public class HudManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	    
+        if (ResponsesList != null)
+        {
+            button1.text = ResponsesList[0];
+            button2.text = ResponsesList[1];
+            button3.text = ResponsesList[2];
+            button4.text = ResponsesList[3];
+        }
 	}
 
 
@@ -66,5 +82,39 @@ public class HudManager : MonoBehaviour {
     public void ExitPress()
     {
         Application.Quit();
+    }
+
+    public void Button1Press()
+    {
+
+    }
+    public void Button2Press()
+    {
+
+    }
+    public void Button3Press()
+    {
+
+    }
+    public void Button4Press()
+    {
+
+    }
+    public void NewResponses(List<string> responsesList)
+    {
+        ResponsesList = responsesList;
+    }
+
+    public void Button5Press()
+    {
+
+    }
+    public void Button6Press()
+    {
+
+    }
+    public void NewArguments(List<string> argumentsList)
+    {
+        ArgumentsList = argumentsList;
     }
 }
