@@ -80,7 +80,7 @@ public class DialogueManager : MonoBehaviour {
         }
 
         currentChar = GameManager.singleton.currentChar;
-        EventManager.OnNewFlirt += NewAccroche;
+        GameManager.OnNewFlirt += NewAccroche;
         DialogueBoxManager.OnQuestion += NewQuestion;
         DialogueBoxManager.OnResponse += NewResponses;
         HudManager.OnArgument += NewArguments;
