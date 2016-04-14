@@ -70,12 +70,13 @@ public class DialogueManager : MonoBehaviour {
         for (int i = 0; i < Responses.Count; i++)
         {
             responsesArguments.Add(Responses[i] + "0", Arguments[i * 2]);
-            responsesArguments.Add(Responses[i] + "1", Arguments[i * 2 + 1]);
+            responsesArguments.Add(Responses[i] + "1", Arguments[i * 2 + 1]);       
         }
         for (int i = 0; i < Arguments.Count; i++)
         {
             argumentsRetours.Add(Arguments[i] + "0", Retours[i * 2]);
             argumentsRetours.Add(Arguments[i] + "1", Retours[i * 2 + 1]);
+            //Debug.Log(Arguments[i * 2 + 1]);
         }
 
         currentChar = GameManager.singleton.currentChar;
