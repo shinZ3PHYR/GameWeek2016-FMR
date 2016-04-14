@@ -26,6 +26,7 @@ public class DialogueManager : MonoBehaviour {
     private int currentType;
     public List<string> likeList;
     public List<string> dislikeList;
+    private List<string> categoriesDone = new List<string>();
 
     private int rdmValue;
     private int rdmChance;
@@ -107,6 +108,7 @@ public class DialogueManager : MonoBehaviour {
         currentType = (int) currentChar.type;
         likeList = currentChar.likeList;
         dislikeList = currentChar.dislikeList;
+        categoriesDone.Clear();
 
         rdmValue = Random.Range(0, 10);
         rdmChance = Random.Range(0, 1);
@@ -175,8 +177,18 @@ public class DialogueManager : MonoBehaviour {
                 currentCategorieIsLiked = false;
                 break;
         }
-        question = questionsCategories[categorie];
-        OnReturnQuestion(question);
+        
+        if (categoriesDone.Contains(categorie))
+        {
+            NewQuestion();
+            return;
+        }
+        else
+        {
+            categoriesDone.Add(categorie);
+            question = questionsCategories[categorie];
+            OnReturnQuestion(question);
+        }
     }
 
     void NewResponses()
@@ -217,11 +229,11 @@ public class DialogueManager : MonoBehaviour {
             switch (buttonNb)
             {
                 case 0:
-                    SendMood(Character.Mood.Veryhangry);
+                    SendMood(Character.Mood.Veryangry);
                     GameManager.singleton.currentLoveMetre -= 2;
                     break;
                 case 1:
-                    SendMood(Character.Mood.Hangry);
+                    SendMood(Character.Mood.Angry);
                     GameManager.singleton.currentLoveMetre -= 1;
                     break;
                 case 2:
