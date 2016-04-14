@@ -203,11 +203,11 @@ public class DialogueManager : MonoBehaviour {
                     GameManager.singleton.currentLoveMetre += 1;
                     break;
                 case 2:
-                    SendMood(Character.Mood.Hangry);
+                    SendMood(Character.Mood.Angry);
                     GameManager.singleton.currentLoveMetre -= 1;
                     break;
                 case 3:
-                    SendMood(Character.Mood.Veryhangry);
+                    SendMood(Character.Mood.Veryangry);
                     GameManager.singleton.currentLoveMetre -= 2;
                     break;
             }
