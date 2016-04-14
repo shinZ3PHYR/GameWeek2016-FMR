@@ -10,8 +10,7 @@ public class EventManager : MonoBehaviour {
     public delegate void UIAction(float vertAxis);
     public static event UIAction OnUI;
 
-    public delegate void CharAction();
-    public static event CharAction OnNewFlirt;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -26,7 +25,7 @@ public class EventManager : MonoBehaviour {
         }
         if (Input.GetButtonDown("Cancel"))
         {
-            OnNewFlirt();
+            
             Debug.Log("event!");
         }
         if (Input.GetAxis("Vertical") != 0)

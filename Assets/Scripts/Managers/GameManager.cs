@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour {
     public Character currentChar;
     private int charIndex = 0;
 
+    public delegate void CharAction();
+    public static event CharAction OnNewFlirt;
 
     public bool MEC = false;
     public bool MEUF;
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour {
     public void getCurrentChar()
     {
         currentChar = charList[charIndex];
+        OnNewFlirt();
     }
 	// Update is called once per frame
 	void Update () {

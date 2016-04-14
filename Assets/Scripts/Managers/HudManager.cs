@@ -23,6 +23,8 @@ public class HudManager : MonoBehaviour {
     private Vector3 hudPosition;
     private List<string> ResponsesList;
     private List<string> ArgumentsList;
+    private GameObject ButtonZone;
+    private GameObject ButtonZone2;
 
 	// Use this for initialization
 	void Start () {
@@ -37,6 +39,9 @@ public class HudManager : MonoBehaviour {
         hudPosition = hud.transform.position;
         hudPosition.y -= Screen.height;
         hud.transform.position = hudPosition;
+
+        ButtonZone = GameObject.Find("ButtonZone");
+        ButtonZone2 = GameObject.Find("ButtonZone2");
 	}
 	
 	// Update is called once per frame
@@ -115,7 +120,10 @@ public class HudManager : MonoBehaviour {
     }
     public void NewResponses(List<string> responsesList)
     {
+        ButtonZone.SetActive(true);
+        ButtonZone2.SetActive(false);
         ResponsesList = responsesList;
+        
     }
 
     public void Button5Press()
@@ -128,6 +136,8 @@ public class HudManager : MonoBehaviour {
     }
     public void NewArguments(List<string> argumentsList)
     {
+        ButtonZone.SetActive(false);
+        ButtonZone2.SetActive(true);
         ArgumentsList = argumentsList;
     }
 }
