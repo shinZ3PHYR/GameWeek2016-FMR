@@ -78,7 +78,7 @@ public class CharacterManager : MonoBehaviour {
 		}
 
 		GameObject EmptyChar = GameObject.Instantiate(genericCharacterPrefab, charaPos.position, Quaternion.identity) as GameObject;
-		EmptyChar.transform.parent = GameObject.Find("Canvas").transform;
+		EmptyChar.transform.parent = GameObject.Find("Characters").transform;
 		customCharacter = EmptyChar.GetComponent<Character>();
 
 		customCharacter.charaPos = charaPos;
@@ -131,7 +131,7 @@ public class CharacterManager : MonoBehaviour {
 			
 			GetAssociatedSet(customCharacter.type, customCharacter.neutralSet);
 
-			customCharacter.DrawNeutralChar();
+			customCharacter.DrawNeutralChar(); //TODO débrancher drawneutralchar
 		}
 		else
 		{
