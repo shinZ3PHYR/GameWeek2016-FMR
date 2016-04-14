@@ -16,6 +16,11 @@ public class Character : MonoBehaviour {
 
 	public Mood currentMood = Mood.Neutral;
 
+	public Transform charaPos;
+	[SerializeField]
+	private AnimationCurve scaleCurve;
+	[SerializeField]
+	private AnimationCurve scaleCurveBis;
 
 	public Sprite faceShape;
 	public Sprite eyes;
@@ -67,6 +72,60 @@ public class Character : MonoBehaviour {
 		transform.GetChild(4).GetComponent<Image>().sprite = neutralSet[2]; //hairCut
 		transform.GetChild(5).GetComponent<Image>().sprite = neutralSet[3]; //Dress
 		transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[4]; //ForeArm
+	}
+
+	IEnumerator TweenTranslate(float scaleTime)
+	{
+		float elapsedTime = 0;
+		while(elapsedTime < scaleTime)// && AllowFX
+		{
+			Debug.Log("dayum");
+			float scaleRatio = scaleCurve.Evaluate(elapsedTime /scaleTime);
+			transform.Translate(0, scaleRatio * 20f, 0);
+			elapsedTime+= Time.deltaTime;
+			yield return null;
+		}
+	}
+
+	IEnumerator TweenFlip(float scaleTime)
+	{
+		float elapsedTime = 0;
+		while(elapsedTime < scaleTime)// && AllowFX
+		{
+			Debug.Log("dayum");
+			float scaleRatio = scaleCurveBis.Evaluate(elapsedTime /scaleTime);
+			transform.localScale = new Vector3(scaleRatio, transform.localScale.y, transform.localScale.z);
+			elapsedTime+= Time.deltaTime;
+			yield return null;
+		}
+	}
+
+	// IEnumerator TweenFade(float fadeTime)
+	// {
+	// 	float elapsedTime = 0;
+	// 	while(uiImage.color.a < 1)
+	// 	{
+	// 		float fadeRatio = elapsedTime / fadeTime;
+	// 		color= new Color(1,1,1, fadeRatio);
+	// 		elapsedTime+= Time.deltaTime;
+	// 		yield return null;
+	// 	}
+	// }
+
+	public void Appear()
+	{
+		transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+		StartCoroutine(TweenTranslate(.75f));
+	}
+
+	public void Flip()
+	{
+		StartCoroutine(TweenFlip(.5f));
+	}
+
+	public void Fade()
+	{
+		StartCoroutine(TweenFade(.5f));
 	}
 
 	public void Randomize()

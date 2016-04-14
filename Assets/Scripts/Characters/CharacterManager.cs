@@ -69,6 +69,8 @@ public class CharacterManager : MonoBehaviour {
 		GameObject EmptyChar = GameObject.Instantiate(genericCharacterPrefab, charaPos.position, Quaternion.identity) as GameObject;
 		EmptyChar.transform.parent = GameObject.Find("Canvas").transform;
 		customCharacter = EmptyChar.GetComponent<Character>();
+
+		customCharacter.charaPos = charaPos;
 		//TODO Manage Race
 		
 		if(GameManager.singleton.MEUF)
@@ -89,7 +91,7 @@ public class CharacterManager : MonoBehaviour {
 		{	
 				
 			customCharacter.neutralSet.Add(femaleEyesPool[Random.Range(0, femaleEyesPool.Count-1)]); //eyes
-			customCharacter.eyesColor = new Color(Random.Range(.4f, 1), Random.Range(.4f, 1), Random.Range(.4f, 1), Random.Range(.6f, 1));
+			customCharacter.eyesColor = new Color(Random.Range(.4f, 1), Random.Range(.4f, 1), Random.Range(.4f, 1));
 			customCharacter.neutralSet.Add(femaleMouthesPool[Random.Range(0, femaleMouthesPool.Count-1)]);
 			customCharacter.neutralSet.Add(femaleHairCutPool[Random.Range(0, femaleHairCutPool.Count-1)]);
 			customCharacter.neutralSet.Add(femaleDressPool[Random.Range(0, femaleDressPool.Count-1)]);
