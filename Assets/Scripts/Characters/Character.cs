@@ -81,7 +81,7 @@ public class Character : MonoBehaviour {
 		float elapsedTime = 0;
 		while(elapsedTime < scaleTime)// && AllowFX
 		{
-			Debug.Log("dayum");
+			// Debug.Log("dayum");
 			float scaleRatio = scaleCurve.Evaluate(elapsedTime /scaleTime);
 			transform.Translate(0, scaleRatio * 20f, 0);
 			elapsedTime+= Time.deltaTime;
