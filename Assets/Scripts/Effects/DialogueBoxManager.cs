@@ -22,12 +22,16 @@ public class DialogueBoxManager : MonoBehaviour {
     public delegate void CharActionR();
     public static event CharActionR OnResponse;
 
+    public delegate void CharActionRF();
+    public static event CharActionRF OnRetourFinish;
+
 	// Use this for initialization
 	void Start () {
         DialogueManager.OnReturnAccroche += SetCurrentAccroche;
         DialogueManager.OnReturnQuestion += SetCurrentQuestion;
         DialogueManager.OnReturnRetour += SetCurrentRetour;
         HudManager.OnNext += NextIntel;
+        Character.OnFinishQuestion += NewQuestion;
 
 		uiText = GetComponent<Text>();
 		//text = dialList[dialogueIndex];
@@ -35,7 +39,11 @@ public class DialogueBoxManager : MonoBehaviour {
      	//StartCoroutine(LetterPop(text, textSpeed));
      
 	}
-    void SetCurrentAccroche(string dialString)
+    void NewQuestion()
+    {
+        OnQuestion();
+    }
+        void SetCurrentAccroche(string dialString)
     {
         
         StopCoroutine("LetterPop");
@@ -74,6 +82,7 @@ public class DialogueBoxManager : MonoBehaviour {
         EraseText();
         StartCoroutine(LetterPop(dialString, textSpeed));
         //dialList.Add(dialString);
+        OnRetourFinish();
     }
 
 	public void NextDialogue()

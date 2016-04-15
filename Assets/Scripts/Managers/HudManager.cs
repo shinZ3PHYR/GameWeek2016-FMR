@@ -40,6 +40,7 @@ public class HudManager : MonoBehaviour {
         DialogueManager.OnReturnResponses += NewResponses;
         DialogueManager.OnReturnArguments += NewArguments;
         DialogueManager.OnReturnAccroche += NewAccroche;
+        Character.OnFinishQuestion += changeButtons;
 
         menu.gameObject.SetActive(false);
 
@@ -53,7 +54,12 @@ public class HudManager : MonoBehaviour {
 
         StartCoroutine(TweenTranslate(1.2f));
 	}
-	
+	void changeButtons()
+    {
+        ButtonZone.SetActive(false);
+        ButtonZone2.SetActive(false);
+        ButtonZone3.SetActive(true);
+    }
 	// Update is called once per frame
 	void Update () {
         if (ResponsesList != null)

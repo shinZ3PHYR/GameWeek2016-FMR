@@ -56,15 +56,21 @@ public class Character : MonoBehaviour {
     private int nbQuestion = 0;
     public delegate void CharAction();
     public static event CharAction OnFinishChar;
+    public delegate void CharActionQ();
+    public static event CharActionQ OnFinishQuestion;
 
 
 	void Start ()
 	{
-		DialogueManager.SendMood += ChangeMood;
+        DialogueManager.SendMood += ChangeMood;
+        DialogueBoxManager.OnRetourFinish += NewQuestion;
         Timer.OnTimerEnd += NewQuestion;
+        
+        
 
         Appear();
 	}
+
     void NewQuestion()
     {
         nbQuestion++;
@@ -72,7 +78,13 @@ public class Character : MonoBehaviour {
         {
             GameManager.singleton.charIndex++;
             OnFinishChar();
+            nbQuestion = 0;
         }
+        else
+        {
+            OnFinishQuestion();
+        }
+        
     }
 
 	public void EraseChar()
