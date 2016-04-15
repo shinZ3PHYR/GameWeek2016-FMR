@@ -56,9 +56,9 @@ public class HudManager : MonoBehaviour {
 	}
 	void changeButtons()
     {
-        ButtonZone.SetActive(false);
+        ButtonZone.SetActive(true);
         ButtonZone2.SetActive(false);
-        ButtonZone3.SetActive(true);
+        ButtonZone3.SetActive(false);
     }
 	// Update is called once per frame
 	void Update () {

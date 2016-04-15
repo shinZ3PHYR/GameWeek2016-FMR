@@ -25,6 +25,8 @@ public class DialogueBoxManager : MonoBehaviour {
     public delegate void CharActionRF();
     public static event CharActionRF OnRetourFinish;
 
+    public bool retour = false;
+
 	// Use this for initialization
 	void Start () {
         DialogueManager.OnReturnAccroche += SetCurrentAccroche;
@@ -45,7 +47,7 @@ public class DialogueBoxManager : MonoBehaviour {
     }
         void SetCurrentAccroche(string dialString)
     {
-        
+        retour = false;
         StopCoroutine("LetterPop");
         StopAllCoroutines();
         EraseText();
@@ -65,7 +67,7 @@ public class DialogueBoxManager : MonoBehaviour {
 
     void SetCurrentQuestion(string dialString)
     {
-        
+        retour = false;
         StopCoroutine("LetterPop");
         StopAllCoroutines();
         EraseText();
@@ -76,13 +78,13 @@ public class DialogueBoxManager : MonoBehaviour {
 
     void SetCurrentRetour(string dialString)
     {
-        
+        retour = true;
         StopCoroutine("LetterPop");
         StopAllCoroutines();
         EraseText();
         StartCoroutine(LetterPop(dialString, textSpeed));
         //dialList.Add(dialString);
-        OnRetourFinish();
+        
     }
 
 	public void NextDialogue()
@@ -127,6 +129,12 @@ public class DialogueBoxManager : MonoBehaviour {
 			yield return new WaitForSeconds(delay);
 		}
 		textLock = false;
+        if(retour)
+        {
+            yield return new WaitForSeconds(2);
+            OnRetourFinish();
+        }
+            
 		yield return null;
 	}
 
