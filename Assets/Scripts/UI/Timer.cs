@@ -15,7 +15,7 @@ public class Timer : MonoBehaviour
     void Start()
     {
 
-        _slider = GetComponentInChildren<Slider>();
+        _slider = GetComponent<Slider>();
 
     }
 

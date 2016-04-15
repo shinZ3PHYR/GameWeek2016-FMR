@@ -59,8 +59,8 @@ public class CharacterManager : MonoBehaviour {
 	public List<Sprite> maleEyesPool = new List<Sprite>();
 	public List<Sprite> maleMouthesPool = new List<Sprite>();
 	public List<Sprite> maleHairCutPool = new List<Sprite>();
-	public List<Sprite> maleDressPool = new List<Sprite>();
-	// public List<Sprite> accessoryPool = new List<Sprite>();
+	public List<Sprite> maleHairCutFrontPool = new List<Sprite>();
+	public List<Sprite> maleDressPool = new List<Sprite>();	// public List<Sprit accessoryPool = new List<Sprite>()	
 	public List<Sprite> maleForeArmsPool = new List<Sprite>();
 	public List<Sprite> maleBodyPool = new List<Sprite>();
 	public List<Sprite> maleFacePool = new List<Sprite>();
@@ -103,15 +103,15 @@ public class CharacterManager : MonoBehaviour {
 		if(customCharacter.gender == Gender.Female)
 		{	
 				
-			customCharacter.neutralSet.Add(femaleEyesPool[Random.Range(0, femaleEyesPool.Count-1)]); //eyes
 			customCharacter.eyesColor = new Color(Random.Range(.4f, 1), Random.Range(.4f, 1), Random.Range(.4f, 1));
+			
+			customCharacter.neutralSet.Add(femaleEyesPool[Random.Range(0, femaleEyesPool.Count-1)]); //eyes
 			customCharacter.neutralSet.Add(femaleMouthesPool[Random.Range(0, femaleMouthesPool.Count-1)]);
 			customCharacter.neutralSet.Add(femaleHairCutPool[Random.Range(0, femaleHairCutPool.Count-1)]);
+			
 			customCharacter.hairCutFront = femaleHairCutFrontPool[Random.Range(0, femaleHairCutFrontPool.Count-1)];
 			customCharacter.dress = femaleDressPool[Random.Range(0, femaleDressPool.Count-1)];
 			customCharacter.bodyColor = bodyColorPool[Random.Range(0, bodyColorPool.Count-1)];
-			
-			// Sprite temp = femaleForeArmsPool.Find(item=>(item.name.Contains(customCharacter.bodyColor)));
 			
 			customCharacter.foreArms = femaleForeArmsPool.Find(item=>(item.name.Contains(customCharacter.bodyColor)));
 			customCharacter.body = femaleBodyPool.Find(item=>(item.name.Contains(customCharacter.bodyColor)));
@@ -138,13 +138,22 @@ public class CharacterManager : MonoBehaviour {
 		}
 		else
 		{
+			customCharacter.eyesColor = new Color(Random.Range(.4f, 1), Random.Range(.4f, 1), Random.Range(.4f, 1));
+			
 			customCharacter.neutralSet.Add(maleEyesPool[Random.Range(0, maleEyesPool.Count-1)]); //eyes
 			customCharacter.neutralSet.Add(maleMouthesPool[Random.Range(0, maleMouthesPool.Count-1)]);
 			customCharacter.neutralSet.Add(maleHairCutPool[Random.Range(0, maleHairCutPool.Count-1)]);
-			customCharacter.neutralSet.Add(maleDressPool[Random.Range(0, maleDressPool.Count-1)]);
-			customCharacter.neutralSet.Add(maleForeArmsPool[Random.Range(0, maleForeArmsPool.Count-1)]);
+			
+			customCharacter.hairCutFront = maleHairCutFrontPool[Random.Range(0, maleHairCutFrontPool.Count-1)];
+			customCharacter.dress = maleDressPool[Random.Range(0, maleDressPool.Count-1)];
+			customCharacter.bodyColor = bodyColorPool[Random.Range(0, bodyColorPool.Count-1)];
+			
+			customCharacter.foreArms = maleForeArmsPool.Find(item=>(item.name.Contains(customCharacter.bodyColor)));
+			customCharacter.body = maleBodyPool.Find(item=>(item.name.Contains(customCharacter.bodyColor)));
+			customCharacter.faceShape = maleFacePool.Find(item=>(item.name.Contains(customCharacter.bodyColor)));
 
-			customCharacter.name = maleNamePool[Random.Range(0, maleNamePool.Count-1)];
+
+			customCharacter.name = maleNamePool[Random.Range(0, femaleNamePool.Count-1)];
 			
 			switch(GameManager.singleton.difficulty)
 			{
@@ -204,7 +213,9 @@ public class CharacterManager : MonoBehaviour {
 	public void GetHappySet(Type type)
 	{
 		// Debug.Log(type.ToString());
-		Sprite temp = femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Happy")));//&&item.name.Contains(customCharacter.gender.ToString())
+		
+		Sprite temp = femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Happy")&&item.name.Contains(customCharacter.gender.ToString())));//
+		
 		// Debug.Log(temp);
 		customCharacter.happySet.Add(temp);
 	}
@@ -212,7 +223,7 @@ public class CharacterManager : MonoBehaviour {
 	public void GetVeryHappySet(Type type)
 	{
 		// Debug.Log(type.ToString());
-		Sprite temp = femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("VeryHappy")));//&&item.name.Contains(customCharacter.gender.ToString())
+		Sprite temp = femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Veryhappy")&&item.name.Contains(customCharacter.gender.ToString())));//&&item.name.Contains(customCharacter.gender.ToString())
 		// Debug.Log(temp);
 		customCharacter.veryHappySet.Add(temp);
 	}
@@ -220,7 +231,7 @@ public class CharacterManager : MonoBehaviour {
 	public void GetAngrySet(Type type)
 	{
 		// Debug.Log(type.ToString());
-		Sprite temp = femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Angry")));//&&item.name.Contains(customCharacter.gender.ToString())
+		Sprite temp = femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Angry")&&item.name.Contains(customCharacter.gender.ToString())));//&&item.name.Contains(customCharacter.gender.ToString())
 		// Debug.Log(temp);
 		customCharacter.angrySet.Add(temp);
 	}
@@ -228,7 +239,7 @@ public class CharacterManager : MonoBehaviour {
 	public void GetVeryAngrySet(Type type)
 	{
 		// Debug.Log(type.ToString());
-		Sprite temp = femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("VeryAngry")));//&&item.name.Contains(customCharacter.gender.ToString())
+		Sprite temp = femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("VeryAngry")&&item.name.Contains(customCharacter.gender.ToString())));//&&item.name.Contains(customCharacter.gender.ToString())
 		// Debug.Log(temp);
 		customCharacter.veryAngrySet.Add(temp);
 	}
