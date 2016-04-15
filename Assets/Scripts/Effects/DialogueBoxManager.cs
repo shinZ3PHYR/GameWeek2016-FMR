@@ -27,32 +27,53 @@ public class DialogueBoxManager : MonoBehaviour {
         DialogueManager.OnReturnAccroche += SetCurrentAccroche;
         DialogueManager.OnReturnQuestion += SetCurrentQuestion;
         DialogueManager.OnReturnRetour += SetCurrentRetour;
+        HudManager.OnNext += NextIntel;
 
 		uiText = GetComponent<Text>();
 		//text = dialList[dialogueIndex];
-       
-     	StartCoroutine(LetterPop(text, textSpeed));
+        //StopCoroutine("LetterPop");
+     	//StartCoroutine(LetterPop(text, textSpeed));
      
 	}
     void SetCurrentAccroche(string dialString)
     {
+        
+        StopCoroutine("LetterPop");
+        StopAllCoroutines();
+        EraseText();
         StartCoroutine(LetterPop(dialString, textSpeed));
         //dialList.Add(dialString);
         //dialList.Add("Je m'appel" + GameManager.singleton.currentChar.name);
         //dialList.Add("alors...");
         //EraseText();
         //StartCoroutine(LetterPop(dialList[0], textSpeed));
-        OnQuestion();
+        
     }
+    void NextIntel()
+    {
+        OnQuestion();
+        //StartCoroutine(LetterPop("alors...", textSpeed));
+    }
+
     void SetCurrentQuestion(string dialString)
     {
-        dialList.Add(dialString);
+        
+        StopCoroutine("LetterPop");
+        StopAllCoroutines();
+        EraseText();
+        StartCoroutine(LetterPop(dialString, textSpeed));
+        //dialList.Add(dialString);
         OnResponse();
     }
 
     void SetCurrentRetour(string dialString)
     {
-        dialList.Add(dialString);
+        
+        StopCoroutine("LetterPop");
+        StopAllCoroutines();
+        EraseText();
+        StartCoroutine(LetterPop(dialString, textSpeed));
+        //dialList.Add(dialString);
     }
 
 	public void NextDialogue()

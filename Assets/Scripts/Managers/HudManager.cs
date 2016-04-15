@@ -39,6 +39,7 @@ public class HudManager : MonoBehaviour {
 
         DialogueManager.OnReturnResponses += NewResponses;
         DialogueManager.OnReturnArguments += NewArguments;
+        DialogueManager.OnReturnAccroche += NewAccroche;
 
         menu.gameObject.SetActive(false);
 
@@ -48,7 +49,7 @@ public class HudManager : MonoBehaviour {
 
         ButtonZone = GameObject.Find("ButtonZone");
         ButtonZone2 = GameObject.Find("ButtonZone2");
-        ButtonZone2 = GameObject.Find("ButtonZone3");
+        ButtonZone3 = GameObject.Find("ButtonZone3");
 
         StartCoroutine(TweenTranslate(1.2f));
 	}
@@ -165,6 +166,13 @@ public class HudManager : MonoBehaviour {
         ButtonZone2.SetActive(true);
         ButtonZone3.SetActive(false);
         ArgumentsList = argumentsList;
+    }
+
+    public void NewAccroche(string accroche)
+    {
+        ButtonZone.SetActive(false);
+        ButtonZone2.SetActive(false);
+        ButtonZone3.SetActive(true);
     }
 
     IEnumerator TweenTranslate(float scaleTime)
