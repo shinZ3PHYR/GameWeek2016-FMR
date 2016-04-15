@@ -38,12 +38,24 @@ public class GameManager : MonoBehaviour {
 	void Start () 
     {
         DontDestroyOnLoad(this);
-        CharacterManager.OnCreatedCharaList += getCurrentChar;
+        CharacterManager.OnCreatedCharaList += getFirstChar;
+        Character.OnFinishChar += getCurrentChar;
 	}
 	
-    public void getCurrentChar()
+    public void getFirstChar()
     {
         currentChar = charList[charIndex];
+    }
+    public void getCurrentChar()
+    {
+
+        for(int i=0; i<charList.Count; i++)
+        {
+            charList[i].gameObject.SetActive(false);
+        }
+        currentChar.gameObject.SetActive(true);
+        
+
         OnNewFlirt();
     }
 	// Update is called once per frame
