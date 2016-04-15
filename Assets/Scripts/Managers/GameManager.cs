@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager singleton;
     public Character currentChar;
-    private int charIndex = 0;
+    public int charIndex = 0;
 
     public delegate void CharAction();
     public static event CharAction OnNewFlirt;
