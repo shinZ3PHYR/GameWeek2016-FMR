@@ -58,7 +58,7 @@ public class Character : MonoBehaviour {
 		transform.GetChild(2).GetComponent<Image>().sprite = faceShape;
 		transform.GetChild(5).GetComponent<Image>().sprite = nose;
 		transform.GetChild(4).GetComponent<Image>().sprite = foreArms;
-		transform.GetChild(9).GetComponent<Image>().sprite = hairCutFront;
+		transform.GetChild(8).GetComponent<Image>().sprite = hairCutFront;
 		transform.GetChild(3).GetComponent<Image>().sprite = dress; //Dress
 
 		transform.GetChild(1).GetComponent<Image>().sprite = null; //eyes
@@ -150,7 +150,10 @@ public class Character : MonoBehaviour {
 
 	public void ChangeMood(Mood mood)
 	{	
+		currentMood = mood;
+
 		EraseChar();
+
 		switch(mood)
 		{
 			case Mood.Neutral:
@@ -178,7 +181,7 @@ public class Character : MonoBehaviour {
 				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
 				transform.GetChild(6).GetComponent<Image>().color = eyesColor;
 				// transform.GetChild(1).GetComponent<Image>().sprite = veryAngrySet[0]; //eyes
-				transform.GetChild(7).GetComponent<Image>().sprite = veryAngrySet[0]; //mouth
+				transform.GetChild(8).GetComponent<Image>().sprite = veryAngrySet[0]; //mouth
 				// transform.GetChild(6).GetComponent<Image>().sprite = veryAngrySet[2]; //ForeArm
 				break;
 			case Mood.Angry:
