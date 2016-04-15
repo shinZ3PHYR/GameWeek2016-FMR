@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager singleton;
     public Character currentChar;
-    private int charIndex = 0;
+    public int charIndex = 0;
 
     public delegate void CharAction();
     public static event CharAction OnNewFlirt;
@@ -45,17 +45,17 @@ public class GameManager : MonoBehaviour {
     public void getFirstChar()
     {
         currentChar = charList[charIndex];
-    }
-    public void getCurrentChar()
-    {
-
         for(int i=0; i<charList.Count; i++)
         {
             charList[i].gameObject.SetActive(false);
         }
         currentChar.gameObject.SetActive(true);
-        
-
+    }
+    public void getCurrentChar()
+    {
+        currentChar.gameObject.SetActive(false);
+        currentChar = charList[charIndex];
+        currentChar.gameObject.SetActive(true);
         OnNewFlirt();
     }
 	// Update is called once per frame
