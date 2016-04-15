@@ -26,7 +26,6 @@ public class DialogueBoxManager : MonoBehaviour {
 	void Start () {
         DialogueManager.OnReturnAccroche += SetCurrentAccroche;
         DialogueManager.OnReturnQuestion += SetCurrentQuestion;
-
         DialogueManager.OnReturnRetour += SetCurrentRetour;
 
 		uiText = GetComponent<Text>();
@@ -37,9 +36,10 @@ public class DialogueBoxManager : MonoBehaviour {
 	}
     void SetCurrentAccroche(string dialString)
     {
-        dialList.Add(dialString);
+        StartCoroutine(LetterPop(dialString, textSpeed));
+        //dialList.Add(dialString);
         //dialList.Add("Je m'appel" + GameManager.singleton.currentChar.name);
-        dialList.Add("alors...");
+        //dialList.Add("alors...");
         //EraseText();
         //StartCoroutine(LetterPop(dialList[0], textSpeed));
         OnQuestion();

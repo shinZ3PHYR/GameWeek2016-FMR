@@ -60,7 +60,7 @@ public class Character : MonoBehaviour {
     void NewQuestion()
     {
         nbQuestion++;
-        if (nbQuestion <= 4)
+        if (nbQuestion >= 4)
         {
             GameManager.singleton.charIndex++;
             OnFinishChar();

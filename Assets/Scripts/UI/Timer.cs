@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Timer : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class Timer : MonoBehaviour
     {
 
         _slider = GetComponent<Slider>();
-
     }
 
 
@@ -30,12 +30,11 @@ public class Timer : MonoBehaviour
     void Update()
     {
 
-        if (_slider.value >= 0) _slider.value -= Time.deltaTime / multiplier;
+            if (_slider.value >= 0) _slider.value -= Time.deltaTime / multiplier;
 
-
-        if (_slider.value == 0 && stuffDone == false) DoStuff();
+            if (_slider.value == 0 && stuffDone == false) DoStuff();
+        
     }
-
 
 
     void DoStuff()
