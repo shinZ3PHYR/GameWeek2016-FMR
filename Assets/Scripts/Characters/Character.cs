@@ -58,7 +58,7 @@ public class Character : MonoBehaviour {
 		transform.GetChild(2).GetComponent<Image>().sprite = faceShape;
 		transform.GetChild(5).GetComponent<Image>().sprite = nose;
 		transform.GetChild(4).GetComponent<Image>().sprite = foreArms;
-		transform.GetChild(9).GetComponent<Image>().sprite = hairCutFront;
+		transform.GetChild(8).GetComponent<Image>().sprite = hairCutFront;
 		transform.GetChild(3).GetComponent<Image>().sprite = dress; //Dress
 
 		transform.GetChild(1).GetComponent<Image>().sprite = null; //eyes
