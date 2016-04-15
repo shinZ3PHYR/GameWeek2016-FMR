@@ -45,12 +45,16 @@ public class HudManager : MonoBehaviour {
         menu.gameObject.SetActive(false);
 
         hudPosition = hud.transform.position;
-        hudPosition.y -= Screen.height;
+        // hudPosition.y -= Screen.height;
         hud.transform.position = hudPosition;
 
         ButtonZone = GameObject.Find("ButtonZone");
         ButtonZone2 = GameObject.Find("ButtonZone2");
         ButtonZone3 = GameObject.Find("ButtonZone3");
+
+        ButtonZone.SetActive(false);
+        ButtonZone2.SetActive(false);
+        ButtonZone3.SetActive(true);
 
         StartCoroutine(TweenTranslate(1.2f));
 	}

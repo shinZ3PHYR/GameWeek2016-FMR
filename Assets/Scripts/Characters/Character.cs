@@ -134,7 +134,7 @@ public class Character : MonoBehaviour {
 		float elapsedTime = 0;
 		while(elapsedTime < scaleTime)// && AllowFX
 		{
-			Debug.Log("dayum");
+			// Debug.Log("dayum");
 			float scaleRatio = scaleCurveBis.Evaluate(elapsedTime /scaleTime);
 			transform.localScale = new Vector3(scaleRatio, transform.localScale.y, transform.localScale.z);
 			elapsedTime+= Time.deltaTime;
@@ -200,8 +200,8 @@ public class Character : MonoBehaviour {
 			case Mood.Veryhappy:
 				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
 				transform.GetChild(6).GetComponent<Image>().color = eyesColor;
-				// transform.GetChild(1).GetComponent<Image>().sprite = veryHappySet[0]; //eyes
 				transform.GetChild(7).GetComponent<Image>().sprite = veryHappySet[0]; //mouth
+				// transform.GetChild(1).GetComponent<Image>().sprite = veryHappySet[0]; //eyes
 				// transform.GetChild(6).GetComponent<Image>().sprite = veryHappySet[2]; //ForeArm
 				break;
 			case Mood.Happy:
