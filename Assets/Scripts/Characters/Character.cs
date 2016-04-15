@@ -44,6 +44,12 @@ public class Character : MonoBehaviour {
 	public List<string> dislikeList = new List<string>();
 
 	public CharacterManager.Type type;
+
+	public CharacterManager.Type getCharacterType()
+	{
+		return type;
+	}
+
 	public CharacterManager.Gender gender;
 	public CharacterManager.Race race;
 
@@ -56,6 +62,8 @@ public class Character : MonoBehaviour {
 	{
 		DialogueManager.SendMood += ChangeMood;
         Timer.OnTimerEnd += NewQuestion;
+
+        Appear();
 	}
     void NewQuestion()
     {
@@ -136,8 +144,8 @@ public class Character : MonoBehaviour {
 
 	public void Appear()
 	{
-		transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-		StartCoroutine(TweenTranslate(0.75f));
+		transform.position = new Vector3(transform.position.x, -400, transform.position.z);
+		StartCoroutine(TweenTranslate(1.2f));
 	}
 
 	public void Flip()

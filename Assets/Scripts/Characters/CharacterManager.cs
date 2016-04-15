@@ -153,7 +153,7 @@ public class CharacterManager : MonoBehaviour {
 			customCharacter.faceShape = maleFacePool.Find(item=>(item.name.Contains(customCharacter.bodyColor)));
 
 
-			customCharacter.name = maleNamePool[Random.Range(0, femaleNamePool.Count-1)];
+			customCharacter.name = maleNamePool[Random.Range(0, maleNamePool.Count-1)];
 			
 			switch(GameManager.singleton.difficulty)
 			{

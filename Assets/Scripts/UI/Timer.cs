@@ -17,6 +17,7 @@ public class Timer : MonoBehaviour
     {
 
         _slider = GetComponent<Slider>();
+        
     }
 
 

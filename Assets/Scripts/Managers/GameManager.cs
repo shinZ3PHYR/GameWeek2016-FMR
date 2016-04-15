@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
@@ -15,7 +16,9 @@ public class GameManager : MonoBehaviour {
     public bool MEUF;
 
     public List<Character> charList = new List<Character>();
+
     public int currentLoveMetre;
+    public Image loveMeterFill;
 
     public enum Difficulty
     {
@@ -61,6 +64,10 @@ public class GameManager : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-	
+	   if(loveMeterFill == null)
+            return;
+
+        loveMeterFill.fillAmount = currentLoveMetre * (1f/8f); 
+
 	}
 }

@@ -11,6 +11,8 @@ public class HudManager : MonoBehaviour {
     public delegate void CharActionParam(string chosenOne);
     public static event CharActionParam OnRetour;
 
+    public AnimationCurve scaleCurve;
+
     public Transform menu;
     public Image hud;
     public Text button1;
@@ -42,6 +44,8 @@ public class HudManager : MonoBehaviour {
 
         ButtonZone = GameObject.Find("ButtonZone");
         ButtonZone2 = GameObject.Find("ButtonZone2");
+
+        StartCoroutine(TweenTranslate(1.2f));
 	}
 	
 	// Update is called once per frame
@@ -79,6 +83,8 @@ public class HudManager : MonoBehaviour {
             hudPosition.y -= Screen.height;
         }
         hud.transform.position = hudPosition;
+
+        
     }
     
     public void ResumePress()
@@ -129,10 +135,19 @@ public class HudManager : MonoBehaviour {
     public void Button5Press()
     {
         OnRetour(button5.text);
+        // Debug.Log(GameManager.singleton.currentChar.type);
+        if(GameManager.singleton.currentChar.type == CharacterManager.Type.Shy){
+            GameManager.singleton.currentLoveMetre -= 2;
+        }
+        else    
+        {
+            GameManager.singleton.currentLoveMetre += 2;
+        }
     }
     public void Button6Press()
     {
         OnRetour(button6.text);
+        GameManager.singleton.currentLoveMetre += 2;
     }
     public void NewArguments(List<string> argumentsList)
     {
@@ -140,4 +155,18 @@ public class HudManager : MonoBehaviour {
         ButtonZone2.SetActive(true);
         ArgumentsList = argumentsList;
     }
+
+    IEnumerator TweenTranslate(float scaleTime)
+    {
+        float elapsedTime = 0;
+        while(elapsedTime < scaleTime )// && AllowFX
+        {
+            // Debug.Log("dayum");
+            float scaleRatio = scaleCurve.Evaluate(elapsedTime /scaleTime);
+            transform.Translate(0, scaleRatio * 20f, 0);
+            elapsedTime+= Time.deltaTime;
+            yield return null;
+        }
+    }
+
 }
