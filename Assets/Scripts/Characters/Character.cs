@@ -134,7 +134,7 @@ public class Character : MonoBehaviour {
 		float elapsedTime = 0;
 		while(elapsedTime < scaleTime)// && AllowFX
 		{
-			Debug.Log("dayum");
+			// Debug.Log("dayum");
 			float scaleRatio = scaleCurveBis.Evaluate(elapsedTime /scaleTime);
 			transform.localScale = new Vector3(scaleRatio, transform.localScale.y, transform.localScale.z);
 			elapsedTime+= Time.deltaTime;
