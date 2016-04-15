@@ -11,6 +11,9 @@ public class HudManager : MonoBehaviour {
     public delegate void CharActionParam(string chosenOne);
     public static event CharActionParam OnRetour;
 
+    public delegate void CharActionParamB();
+    public static event CharActionParamB OnNext;
+
     public AnimationCurve scaleCurve;
 
     public Transform menu;
@@ -27,6 +30,7 @@ public class HudManager : MonoBehaviour {
     private List<string> ArgumentsList;
     private GameObject ButtonZone;
     private GameObject ButtonZone2;
+    private GameObject ButtonZone3;
 
 	// Use this for initialization
 	void Start () {
@@ -44,6 +48,7 @@ public class HudManager : MonoBehaviour {
 
         ButtonZone = GameObject.Find("ButtonZone");
         ButtonZone2 = GameObject.Find("ButtonZone2");
+        ButtonZone2 = GameObject.Find("ButtonZone3");
 
         StartCoroutine(TweenTranslate(1.2f));
 	}
@@ -128,6 +133,7 @@ public class HudManager : MonoBehaviour {
     {
         ButtonZone.SetActive(true);
         ButtonZone2.SetActive(false);
+        ButtonZone3.SetActive(false);
         ResponsesList = responsesList;
         
     }
@@ -149,10 +155,15 @@ public class HudManager : MonoBehaviour {
         OnRetour(button6.text);
         GameManager.singleton.currentLoveMetre += 2;
     }
+    public void Button7Press()
+    {
+        OnNext();
+    }
     public void NewArguments(List<string> argumentsList)
     {
         ButtonZone.SetActive(false);
         ButtonZone2.SetActive(true);
+        ButtonZone3.SetActive(false);
         ArgumentsList = argumentsList;
     }
 
