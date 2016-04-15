@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour {
             charList[i].gameObject.SetActive(false);
         }
         currentChar.gameObject.SetActive(true);
+        OnNewFlirt();
     }
     public void getCurrentChar()
     {
