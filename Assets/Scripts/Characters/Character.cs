@@ -74,7 +74,7 @@ public class Character : MonoBehaviour {
     void NewQuestion()
     {
         nbQuestion++;
-        if (nbQuestion >= 4)
+        if (nbQuestion >= 3)
         {
             GameManager.singleton.charIndex++;
             OnFinishChar();
@@ -200,8 +200,8 @@ public class Character : MonoBehaviour {
 			case Mood.Veryhappy:
 				transform.GetChild(6).GetComponent<Image>().sprite = neutralSet[0]; //eyes PLACEHOLDER
 				transform.GetChild(6).GetComponent<Image>().color = eyesColor;
-				// transform.GetChild(1).GetComponent<Image>().sprite = veryHappySet[0]; //eyes
 				transform.GetChild(7).GetComponent<Image>().sprite = veryHappySet[0]; //mouth
+				// transform.GetChild(1).GetComponent<Image>().sprite = veryHappySet[0]; //eyes
 				// transform.GetChild(6).GetComponent<Image>().sprite = veryHappySet[2]; //ForeArm
 				break;
 			case Mood.Happy:

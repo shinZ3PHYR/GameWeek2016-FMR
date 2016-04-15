@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Random = UnityEngine.Random;
 
 public class DialogueManager : MonoBehaviour {
 
@@ -89,6 +91,7 @@ public class DialogueManager : MonoBehaviour {
         DialogueBoxManager.OnResponse += NewResponses;
         HudManager.OnArgument += PrepareMood;
         HudManager.OnRetour += NewRetours;
+        Character.OnFinishChar += ResetCategorie;
         
         
 
@@ -177,7 +180,10 @@ public class DialogueManager : MonoBehaviour {
                 currentCategorieIsLiked = false;
                 break;
         }
-        
+        //if (categoriesDone.Count >=4)
+        //{
+        //    return;
+        //}
         if (categoriesDone.Contains(categorie))
         {
             NewQuestion();
@@ -190,7 +196,10 @@ public class DialogueManager : MonoBehaviour {
             OnReturnQuestion(question);
         }
     }
-
+    void ResetCategorie()
+    {
+        categoriesDone.Clear();
+    }
     void NewResponses()
     {
         responses = new List<string>();
