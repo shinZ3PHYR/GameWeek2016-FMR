@@ -47,11 +47,25 @@ public class Character : MonoBehaviour {
 	public CharacterManager.Gender gender;
 	public CharacterManager.Race race;
 
+    private int nbQuestion = 0;
+    public delegate void CharAction();
+    public static event CharAction OnFinishChar;
+
 
 	void Start ()
 	{
 		DialogueManager.SendMood += ChangeMood;
+        Timer.OnTimerEnd += NewQuestion;
 	}
+    void NewQuestion()
+    {
+        nbQuestion++;
+        if (nbQuestion <= 4)
+        {
+            GameManager.singleton.charIndex++;
+            OnFinishChar();
+        }
+    }
 
 	public void EraseChar()
 	{
