@@ -221,20 +221,20 @@ public class CharacterManager : MonoBehaviour {
 
 	public void GetVeryHappySet(Type type)
 	{
-		customCharacter.happySet.Add(femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Veryhappy")&&item.name.Contains(customCharacter.gender.ToString()))));//
-		customCharacter.happySet.Add(femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Eyes")&&item.name.Contains("Veryhappy")&&item.name.Contains(customCharacter.gender.ToString()))));
+		customCharacter.veryHappySet.Add(femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Veryhappy")&&item.name.Contains(customCharacter.gender.ToString()))));//
+		customCharacter.veryHappySet.Add(femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Eyes")&&item.name.Contains("Veryhappy")&&item.name.Contains(customCharacter.gender.ToString()))));
 	}
 
 	public void GetAngrySet(Type type)
 	{
-		customCharacter.happySet.Add(femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Angry")&&item.name.Contains(customCharacter.gender.ToString()))));//
-		customCharacter.happySet.Add(femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Eyes")&&item.name.Contains("Angry")&&item.name.Contains(customCharacter.gender.ToString()))));
+		customCharacter.angrySet.Add(femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Angry")&&item.name.Contains(customCharacter.gender.ToString()))));//
+		customCharacter.angrySet.Add(femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Eyes")&&item.name.Contains("Angry")&&item.name.Contains(customCharacter.gender.ToString()))));
 	}
 
 	public void GetVeryAngrySet(Type type)
 	{
-		customCharacter.happySet.Add(femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Veryangry")&&item.name.Contains(customCharacter.gender.ToString()))));//
-		customCharacter.happySet.Add(femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Eyes")&&item.name.Contains("Veryangry")&&item.name.Contains(customCharacter.gender.ToString()))));
+		customCharacter.veryAngrySet.Add(femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Mouth")&&item.name.Contains("Veryangry")&&item.name.Contains(customCharacter.gender.ToString()))));//
+		customCharacter.veryAngrySet.Add(femaleMoodPool.Find(item=>(item.name.Contains(type.ToString())&&item.name.Contains("Eyes")&&item.name.Contains("Veryangry")&&item.name.Contains(customCharacter.gender.ToString()))));
 	}
 
 	public void SetLikes()
